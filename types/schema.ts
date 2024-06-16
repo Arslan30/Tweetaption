@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { CompositionProps } from "./constants";
+import { CompositionProps, TweetSchema } from "./constants";
 
 export const RenderRequest = z.object({
   id: z.string(),
@@ -25,3 +25,9 @@ export type ProgressResponse =
       url: string;
       size: number;
     };
+
+    export const FetchTweetRequest = z.object({
+      tweetId: z.string(),
+    });
+
+    export type FetchTweetResponse = z.infer<typeof TweetSchema>

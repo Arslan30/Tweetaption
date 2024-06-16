@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { RenderMediaOnLambdaOutput } from "@remotion/lambda/client";
 import {
+  FetchTweetResponse,
   ProgressRequest,
   ProgressResponse,
   RenderRequest,
@@ -56,3 +57,11 @@ export const getProgress = async ({
 
   return makeRequest<ProgressResponse>("/api/lambda/progress", body);
 };
+
+export const fetchTweet = async (tweetId: string) => {
+  const body = {
+    tweetId,
+  };
+
+  return makeRequest<FetchTweetResponse>("/api/twitter/fetch-tweet", body);
+}
