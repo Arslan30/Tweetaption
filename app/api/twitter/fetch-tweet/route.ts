@@ -7,6 +7,8 @@ import { parse } from 'node-html-parser';
 export const POST = executeApi<FetchTweetResponse, typeof FetchTweetRequest>(
   FetchTweetRequest,
   async (req, body) => {
+    console.log("🔍 Fetching tweet...")
+    
     const tweetApiResponse = await fetch(`https://tweethunter.io/api/thread?tweetId=${body.tweetId}`, {
       method: 'GET',
       headers: {
@@ -24,17 +26,22 @@ export const POST = executeApi<FetchTweetResponse, typeof FetchTweetRequest>(
       throw new Error("Couldn't find tweet, maybe it got deleted?")
     }
 
+    console.log("✅ Successfully fetched tweet!")
+
     const tweet = tweetApiResponse[0] as z.infer<typeof TweetSchema>
 
 
     if (tweet.videos.length > 0) {
-      await fetch("https://twitsave.com/info?url=" + tweet.url).then(response => response.text()).then(text => {
+      await fetch("https://info.tweeload.site/result/" + tweet.id, {
+        method: "POST"
+      })
+      .then(response => response.text())
+      .then(text => {
+        console.log("✅ Successfully fetched video URL!")
         const virtualDoc = parse(text)
 
-        virtualDoc.querySelectorAll("tbody > tr").forEach(row => {
-          row.querySelectorAll("ul > li:first-child a").forEach((a, i) => {
-            tweet.videos[i].download_url = a.getAttribute("href") as string
-          })
+        virtualDoc.querySelectorAll(".video").forEach((video, i) => {
+          tweet.videos[i].download_url = video.getAttribute("video-url") ?? ""
         })
       })
     }

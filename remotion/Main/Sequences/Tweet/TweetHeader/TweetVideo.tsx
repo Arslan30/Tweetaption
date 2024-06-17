@@ -1,17 +1,18 @@
 import { Video } from "remotion";
 import { TweetDefinitelyExists } from "../../../../../types/constants";
+import { RefObject } from "react";
 
-const TweetVideo = ({ tweet }: TweetDefinitelyExists) => {
+const TweetVideo = ({ tweet, containerRef }: TweetDefinitelyExists & {
+  containerRef: RefObject<HTMLDivElement>
+}) => {
   return (
-    <div className="flex">
+    <div className="flex h-fit">
       <Video
       style={{borderRadius: "3%", overflow: "hidden", height: "fit-content", width: "100%"}}
-        src={"https://video.twimg.com/amplify_video/1800884084370993152/vid/avc1/1080x1080/kS1Ce-q3QJFf0PA1.mp4?tag=16"}
-        onLoadedData={function (e) {
-          
-        }}
+        src={tweet.videos[0].download_url}
         onLoadedMetadata={function (meta) {
-          console.log(meta.currentTarget.duration)
+          console.log(containerRef.current?.clientWidth, containerRef.current?.clientHeight)
+          console.log("duration:", meta.currentTarget.duration)
         }}/>
     </div>
   )

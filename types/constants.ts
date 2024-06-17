@@ -1,5 +1,7 @@
+import { CalculateMetadataFunction } from "remotion";
 import { z } from "zod";
 export const COMP_NAME = "Main";
+import { getVideoMetadata } from "@remotion/media-utils";
 
 export const TweetSchema = z.object({
   id: z.string(),
@@ -39,3 +41,21 @@ export const DEFAULT_DURATION_IN_FRAMES = 2000;
 export const VIDEO_WIDTH = 1080;
 export const VIDEO_HEIGHT = 1400;
 export const VIDEO_FPS = 30;
+export const OUTRO_DURATION_IN_FRAMES = 1 * VIDEO_FPS;
+
+export const CALCULATE_METADATA_OF_COMPOSITION: CalculateMetadataFunction<z.infer<typeof CompositionProps>> = async ({ props }) => {
+  if (!props.tweet) {
+    return {
+      durationInFrames: 0,
+    };
+  }
+
+  const data = await getVideoMetadata(props.tweet.videos[0].download_url);
+
+  const OUTRO_LENGTH = 1 * VIDEO_FPS;
+  const VIDEO_LENGTH = data.durationInSeconds * VIDEO_FPS;
+  
+  return {
+    durationInFrames: VIDEO_LENGTH + OUTRO_LENGTH,
+  };
+}

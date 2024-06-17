@@ -3,20 +3,21 @@ import TweetHeader from "./TweetHeader/TweetHeader";
 import { TweetDefinitelyExists } from "../../../../types/constants";
 import TweetText from "./TweetText";
 import TweetVideo from "./TweetHeader/TweetVideo";
+import { useRef } from "react";
 
 const Tweet = ({tweet}: TweetDefinitelyExists)  => {
-  const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
-
   const end = durationInFrames - (fps * 1);
+
+  const containerRef = useRef<HTMLDivElement>(null)
 
   return (
     <Sequence durationInFrames={end}>
-      <AbsoluteFill className="p-8">
-        <div className="flex flex-col h-full">
+      <AbsoluteFill>
+        <div className="flex flex-col h-fit p-8" ref={containerRef}>
           <TweetHeader tweet={tweet} />
           <TweetText tweet={tweet}/>
-          <TweetVideo tweet={tweet} />
+          <TweetVideo tweet={tweet} containerRef={containerRef} />
         </div>
       </AbsoluteFill>
     </Sequence>
