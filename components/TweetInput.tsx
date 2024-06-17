@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { TweetSchema } from "../types/constants";
 import { Button } from "./Button";
-import { InputContainer } from "./Container";
 import { ErrorComp } from "./Error";
 import { Input } from "./Input";
 import { useState } from "react";
@@ -19,20 +18,21 @@ export const TweetInput: React.FC<{
   return (
     <div className="flex flex-col">
       <form name="pull-tweet" onSubmit={e => e.preventDefault()}>
-        <InputContainer>
+      <div className="flex border transition focus-within:border-yellow-200 bg-yellow-50 focus-within:bg-white p-2 rounded">
 
           {(
             <>
               <Input
                 placeholder="Tweet URL"
                 name="tweet-url"
-                className="text-cursive font-geist"
+                className="text-cursive font-geist mr-2"
                 disabled={tweetLoading}
                 setText={setTweetUrlInput}
                 text={tweetUrlInput}
               ></Input>
               <Button
                 loading={tweetLoading}
+                disabled={tweetLoading}
                 onClick={async () => {
                   const tweetIdString = new URL(tweetUrlInput).pathname.split("/").pop() ?? ""
                   try {
@@ -58,7 +58,7 @@ export const TweetInput: React.FC<{
             </>
           )}
 
-        </InputContainer>
+        </div>
       </form>
       {error && (
         <ErrorComp message={error}></ErrorComp>

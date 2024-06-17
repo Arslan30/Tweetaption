@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { Spinner } from "./Spinner";
 import { cn } from "../lib/utils";
+import clsx from "clsx";
 
 const ButtonForward: React.ForwardRefRenderFunction<
   HTMLButtonElement,
@@ -32,7 +33,7 @@ const ButtonForward: React.ForwardRefRenderFunction<
     >
       {loading && (
         <>
-          <Spinner size={15} className="mr-2"></Spinner>
+          <Spinner size={15} className="mr-2" color={disabled ? "var(--disabled-text-color)" : "white"}></Spinner>
         </>
       )}
       {children}

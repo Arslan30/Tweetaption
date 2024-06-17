@@ -18,7 +18,7 @@ export const Input: React.FC<{
 
   return (
     <input
-      className={cn("tracking-wider px-2 flex w-full bg-transparent text-base", "focus:border-focused-border-color outline-none", className)}
+      className={cn("rounded-sm tracking-wider px-2 flex w-full bg-transparent text-base", "focus:border-focused-border-color outline-none", className)}
       disabled={disabled}
       placeholder={placeholder}
       name={name}
