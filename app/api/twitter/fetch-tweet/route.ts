@@ -20,7 +20,7 @@ export const POST = executeApi<FetchTweetResponse, typeof FetchTweetRequest>(
         throw error
       })
 
-    if (tweetApiResponse.tweetApiResponse || tweetApiResponse.length === 0) {
+    if (tweetApiResponse.error || tweetApiResponse.length === 0) {
       throw new Error("Couldn't find tweet, maybe it got deleted?")
     }
 

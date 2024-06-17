@@ -38,7 +38,7 @@ const Home: NextPage = () => {
           setTweet={setTweet}
         ></TweetInput>
         {tweet !== null && (
-          <div className="overflow-hidden rounded-geist shadow-[0_0_200px_rgba(0,0,0,0.15)] mb-10 mt-16">
+          <div className="overflow-hidden rounded-lg border mb-10 mt-8">
             <Player
               ref={player}
               component={Main}
