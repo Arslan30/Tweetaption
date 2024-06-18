@@ -20,6 +20,12 @@ export default {
 
       fontFamily: {
         geist: "var(--geist-font)",
+        tweet: "var(--tweet-font)",
+      },
+
+      fontSize: {
+        tweet: "var(--tweet-font-size)",
+        "tweet-sm": "var(--tweet-sm-font-size)",
       },
 
       animation: {

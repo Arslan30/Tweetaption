@@ -5,7 +5,7 @@ import TweetFooter from "./TweetFooter"
 
 const PureTweet = ({ tweet }: TweetDefinitelyExists) => {
   return (
-    <div className="flex flex-col h-fit p-8">
+    <div className="flex flex-col h-fit p-9">
       <TweetHeader tweet={tweet} />
       <TweetText tweet={tweet} />
       <div className="flex h-fit">
@@ -14,7 +14,7 @@ const PureTweet = ({ tweet }: TweetDefinitelyExists) => {
         src={tweet.videos[0].download_url}
         />
       </div>
-      <TweetFooter />
+      <TweetFooter tweet={tweet} />
     </div>
   )
 }

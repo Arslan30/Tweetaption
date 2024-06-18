@@ -1,17 +1,55 @@
-const TweetFooter = () => {
+import { TweetDefinitelyExists } from "../../../../types/constants"
+
+const TimeDisplay = ({tweet}: TweetDefinitelyExists) => {
+  const date = new Date(tweet.datetime);
+
+  const formattedTime = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }).format(date);
+  const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: "short", day: 'numeric' }).format(date);
+
   return (
-    <div className="flex flex-col mt-6 text-xl">
-      <span style={{ color: "rgb(91, 112, 131)" }}>8:58 PM · May 26, 2024</span>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginTop: '15px', width: '100%' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap' }}>
-          <strong>42.8K</strong>
-          <span style={{ color: 'rgb(91, 112, 131)' }}>Retweets</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap' }}>
-          <strong>67.2K</strong>
-          <span style={{ color: 'rgb(91, 112, 131)' }}>Likes</span>
-        </div>
-      </div>
+    <div className="flex">
+      <span style={{ color: "rgb(91, 112, 131)" }}>{formattedTime} · {formattedDate}</span>
+    </div>
+  )
+}
+
+const Stat = ({
+  value,
+  text
+}: {
+  value: string
+  text: string
+}) => {
+  return (
+    <div className="flex items-center whitespace-nowrap gap-[0.25em]">
+      <strong>{value}</strong>
+      <span style={{ color: 'rgb(91, 112, 131)' }}>{text}</span>
+    </div>
+
+  )
+}
+
+const StatsDisplay = ({tweet}: TweetDefinitelyExists) => {
+  function formatNumber(num: number) {
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K';
+    }
+    return num.toString();
+  }
+  
+  return (
+    <div className="flex items-center" style={{ gap: '0.9em', marginTop: '0.5em', width: '100%' }}>
+      <Stat value={formatNumber(tweet.retweets)} text="Retweets" />
+      <Stat value={formatNumber(tweet.likes)} text="Likes" />
+    </div>
+  )
+}
+
+const TweetFooter = ({tweet}: TweetDefinitelyExists) => {
+  return (
+    <div className="flex flex-col mt-5 text-tweet-sm">
+      <TimeDisplay tweet={tweet} />
+      <StatsDisplay tweet={tweet} />
     </div>
   )
 }
