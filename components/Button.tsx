@@ -1,7 +1,6 @@
 import React, { forwardRef } from "react";
 import { Spinner } from "./Spinner";
 import { cn } from "../lib/utils";
-import clsx from "clsx";
 
 const ButtonForward: React.ForwardRefRenderFunction<
   HTMLButtonElement,
@@ -21,10 +20,10 @@ const ButtonForward: React.ForwardRefRenderFunction<
       ref={ref}
       className={cn(
         "inline-flex items-center justify-center py-1.5 appearance-none rounded w-fit px-3 font-geist min-w-fit",
-        "text-white bg-yellow-400 hover:bg-amber-400 focus:bg-yellow-500 transition duration-50",
+        "text-white bg-yellow-400 hover:bg-amber-400 active:bg-yellow-500 transition duration-50",
         "disabled:bg-button-disabled-color disabled:text-disabled-text-color disabled:border-unfocused-border-color disabled:cursor-not-allowed",
         secondary
-          ? "bg-background text-foreground border-unfocused-border-color"
+          ? "bg-white text-black hover:bg-amber-100 active:bg-amber-200"
           : undefined,
           className
       )}

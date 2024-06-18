@@ -1,6 +1,7 @@
 import React from "react";
 import { State } from "../helpers/use-rendering";
 import { Button } from "./Button";
+import { FaDownload } from "react-icons/fa";
 
 const Megabytes: React.FC<{
   sizeInBytes: number;
@@ -11,7 +12,7 @@ const Megabytes: React.FC<{
     unit: "byte",
     unitDisplay: "narrow",
   }).format(sizeInBytes);
-  return <span className="opacity-60">{megabytes}</span>;
+  return <span className="font-bold tracking-tight font-mono text-gray-700">{megabytes}</span>;
 };
 
 export const DownloadButton: React.FC<{
@@ -19,7 +20,12 @@ export const DownloadButton: React.FC<{
   undo: () => void;
 }> = ({ state, undo }) => {
   if (state.status === "rendering") {
-    return <Button disabled>Download video</Button>;
+    return (
+      <Button className="text-sm ml-auto" disabled>
+        <FaDownload className="mr-3" />
+        Download video
+      </Button>
+    )
   }
 
   if (state.status !== "done") {
@@ -27,14 +33,15 @@ export const DownloadButton: React.FC<{
   }
 
   return (
-    <div className="flex">
-      <Button secondary onClick={undo}>
+    <div className="flex items-center">
+      <Button secondary onClick={undo} className="mr-auto">
         <UndoIcon></UndoIcon>
       </Button>
-      <a href={state.url}>
-        <Button>
+      <Megabytes sizeInBytes={state.size}></Megabytes>
+      <a href={state.url} className="ml-4">
+        <Button className="text-sm">
+          <FaDownload className="mr-3" />
           Download video
-          <Megabytes sizeInBytes={state.size}></Megabytes>
         </Button>
       </a>
     </div>

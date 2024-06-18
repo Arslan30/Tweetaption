@@ -18,6 +18,7 @@ import { CALCULATE_METADATA } from "../remotion/Main/COMP_METADATA";
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
 import { Button } from "../components/Button";
 import { FaLink } from "react-icons/fa";
+import { RenderControls } from "../components/RenderControls";
 
 
 const RenderPlayerUnmemoized = ({ tweet }: TweetDefinitelyExists) => {
@@ -61,10 +62,7 @@ const RenderPlayerUnmemoized = ({ tweet }: TweetDefinitelyExists) => {
           autoPlay
         />
       </div>
-
-      <div className="flex w-full text-2xl justify-end">
-        <Button className="mt-4"><FaLink className="mr-3" /> Generate Download Link</Button>
-      </div>
+      <RenderControls tweet={tweet} />
     </div>
   )
 }
