@@ -38,13 +38,13 @@ const RenderPlayerUnmemoized = ({ tweet }: TweetDefinitelyExists) => {
   }, [tweet.id]);
 
   if (!metadata || metadataLoading) {
-    return <div className="flex mb-4 mt-8 items-center animate-pulse justify-center w-full bg-gray-200 overflow-hidden rounded-lg" style={{ height: 600, width: "100%" }}></div>
+    return <div className="flex mb-8 mt-8 items-center animate-pulse justify-center w-full bg-gray-200 overflow-hidden rounded-lg" style={{ height: 600, width: "100%" }}></div>
   }
 
 
   return (
     <div className="flex flex-col">
-      <div className="overflow-hidden rounded-lg border mb-4 mt-8">
+      <div className="overflow-hidden rounded-lg border mb-8 mt-8">
         <Player
           ref={player}
           component={Main}
