@@ -11,31 +11,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
         "unfocused-border-color": "var(--unfocused-border-color)",
         "focused-border-color": "var(--focused-border-color)",
 
         "button-disabled-color": "var(--button-disabled-color)",
         "disabled-text-color": "var(--disabled-text-color)",
-
-        "geist-error": "var(--geist-error)",
-
-        subtitle: "var(--subtitle)",
-      },
-      padding: {
-        "geist-quarter": "var(--geist-quarter-pad)",
-        "geist-half": "var(--geist-half-pad)",
-        geist: "var(--geist-pad)",
-      },
-      spacing: {
-        "geist-quarter": "var(--geist-quarter-pad)",
-        "geist-half": "var(--geist-half-pad)",
-        geist: "var(--geist-pad)",
-      },
-
-      borderRadius: {
-        geist: "var(--geist-border-radius)",
       },
 
       fontFamily: {

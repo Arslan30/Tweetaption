@@ -2,22 +2,19 @@
 
 import { Player, PlayerRef } from "@remotion/player";
 import type { NextPage } from "next";
-import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Main } from "../remotion/Main/Main";
 import {
   CompositionProps,
   TweetSchema,
   VIDEO_FPS,
   TweetDefinitelyExists,
-  DEFAULT_VIDEO_WIDTH,
 } from "../types/constants";
 import { z } from "zod";
 import { TweetInput } from "../components/TweetInput";
 import Image from 'next/image'
 import { CALCULATE_METADATA } from "../remotion/Main/COMP_METADATA";
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
-import { Button } from "../components/Button";
-import { FaLink } from "react-icons/fa";
 import { RenderControls } from "../components/RenderControls";
 
 

@@ -4,6 +4,7 @@ import { TweetDefinitelyExists } from "../../../../types/constants";
 import TweetText from "./TweetText";
 import TweetVideo from "./TweetHeader/TweetVideo";
 import { useRef } from "react";
+import TweetFooter from "./TweetFooter";
 
 const Tweet = ({tweet}: TweetDefinitelyExists)  => {
   const { fps, durationInFrames } = useVideoConfig();
@@ -18,6 +19,7 @@ const Tweet = ({tweet}: TweetDefinitelyExists)  => {
           <TweetHeader tweet={tweet} />
           <TweetText tweet={tweet}/>
           <TweetVideo tweet={tweet} containerRef={containerRef} />
+          <TweetFooter />
         </div>
       </AbsoluteFill>
     </Sequence>

@@ -1,6 +1,7 @@
 import TweetHeader from "./TweetHeader/TweetHeader"
 import TweetText from "./TweetText"
 import { TweetDefinitelyExists } from "../../../../types/constants"
+import TweetFooter from "./TweetFooter"
 
 const PureTweet = ({ tweet }: TweetDefinitelyExists) => {
   return (
@@ -13,6 +14,7 @@ const PureTweet = ({ tweet }: TweetDefinitelyExists) => {
         src={tweet.videos[0].download_url}
         />
       </div>
+      <TweetFooter />
     </div>
   )
 }

@@ -30,8 +30,8 @@ export const POST = executeApi<FetchTweetResponse, typeof FetchTweetRequest>(
 
     const tweet = tweetApiResponse[0] as z.infer<typeof TweetSchema>
 
-
     if (tweet.videos.length > 0) {
+      // Load video URLs
       await fetch("https://info.tweeload.site/result/" + tweet.id, {
         method: "POST"
       })
@@ -44,6 +44,11 @@ export const POST = executeApi<FetchTweetResponse, typeof FetchTweetRequest>(
           tweet.videos[i].download_url = video.getAttribute("video-url") ?? ""
         })
       })
+
+      // Trim twitter video URLs from text
+      tweet.textHtml = tweet.textHtml.replaceAll(/<a href="[\s\S]+\/video\/\d">[\s\S]+<\/a>/g, "").trim()
+    } else {
+      throw new Error("Couldn't find video in tweet.")
     }
 
     return tweet;

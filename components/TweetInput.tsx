@@ -34,23 +34,28 @@ export const TweetInput: React.FC<{
                 loading={tweetLoading}
                 disabled={tweetLoading}
                 onClick={async () => {
-                  const tweetIdString = new URL(tweetUrlInput).pathname.split("/").pop() ?? ""
                   try {
-                    const tweetId = BigInt(tweetIdString).toString()
-                    setTweetLoading(true);
+                    const tweetIdString = new URL(tweetUrlInput).pathname.split("/")[3]
                     try {
-                      const tweet = await fetchTweet(tweetId)
-                      setTweet(tweet);
-                      setError(null);
-                    } catch (e) {
-                      setTweet(null);
-                      setError((e as any).message)
-                    } finally {
-                      setTweetLoading(false);
+                      const tweetId = BigInt(tweetIdString).toString()
+                      setTweetLoading(true);
+                      try {
+                        const tweet = await fetchTweet(tweetId)
+                        setTweet(tweet);
+                        setError(null);
+                      } catch (e) {
+                        setTweet(null);
+                        setError((e as any).message)
+                      } finally {
+                        setTweetLoading(false);
+                      }
+                    } catch {
+                      setTweet(null)
+                      setError("Invalid X/Twitter URL.")
                     }
-                  } catch {
+                  } catch (error) {
                     setTweet(null)
-                    setError("Invalid X/Twitter URL.")
+                    setError("Invalid URL.")
                   }
                 }}
               >
