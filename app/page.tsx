@@ -16,9 +16,12 @@ import Image from 'next/image'
 import { CALCULATE_METADATA } from "../remotion/Main/COMP_METADATA";
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
 import { RenderControls } from "../components/RenderControls";
+import PictureTweet from "../remotion/Main/Sequences/Tweet/PictureTweet";
+import TextTweet from "../remotion/Main/Sequences/Tweet/TextTweet";
+import PureVideoTweet from "../remotion/Main/Sequences/Tweet/PureVideoTweet";
 
 
-const RenderPlayerUnmemoized = ({ tweet }: TweetDefinitelyExists) => {
+const RenderPlayer = ({ tweet }: TweetDefinitelyExists) => {
   const player = useRef<PlayerRef>(null)
 
 
@@ -32,12 +35,11 @@ const RenderPlayerUnmemoized = ({ tweet }: TweetDefinitelyExists) => {
 
   const { value: metadata, loading: metadataLoading } = useAsyncRefresh(async () => {
     return await CALCULATE_METADATA({ tweet });
-  }, [tweet.id]);
+  });
 
   if (!metadata || metadataLoading) {
     return <div className="flex mb-8 mt-8 items-center animate-pulse justify-center w-full bg-gray-200 overflow-hidden rounded-lg" style={{ height: 600, width: "100%" }}></div>
   }
-
 
   return (
     <div className="flex flex-col">
@@ -64,9 +66,6 @@ const RenderPlayerUnmemoized = ({ tweet }: TweetDefinitelyExists) => {
   )
 }
 
-const RenderPlayer = React.memo(RenderPlayerUnmemoized, (prevProps, nextProps) => {
-  return prevProps.tweet.id === nextProps.tweet.id
-})
 
 const Home: NextPage = () => {
   const [tweet, setTweet] = useState<z.infer<typeof TweetSchema> | null>(null);
@@ -82,7 +81,11 @@ const Home: NextPage = () => {
           setTweet={setTweet}
         ></TweetInput>
         {tweet !== null && (
-          <RenderPlayer tweet={tweet} />
+          tweet.videos.length > 0 ?
+            <RenderPlayer tweet={tweet} /> : (tweet.photos.length > 0 ?
+              <PictureTweet tweet={tweet} /> :
+              <TextTweet tweet={tweet} />
+            )
         )}
       </div>
     </div>

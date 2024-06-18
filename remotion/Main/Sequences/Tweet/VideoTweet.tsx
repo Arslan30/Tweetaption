@@ -1,12 +1,12 @@
 import { AbsoluteFill, Sequence, useVideoConfig } from "remotion";
-import TweetHeader from "./TweetHeader/TweetHeader";
+import TweetHeader from "./components/TweetHeader/TweetHeader";
 import { TweetDefinitelyExists } from "../../../../types/constants";
-import TweetText from "./TweetText";
-import TweetVideo from "./TweetHeader/TweetVideo";
+import TweetText from "./components/TweetText";
+import TweetVideo from "./components/TweetVideo";
 import { useRef } from "react";
-import TweetFooter from "./TweetFooter";
+import TweetFooter from "./components/TweetFooter";
 
-const Tweet = ({tweet}: TweetDefinitelyExists)  => {
+const VideoTweet = ({tweet}: TweetDefinitelyExists)  => {
   const { fps, durationInFrames } = useVideoConfig();
   const end = durationInFrames - (fps * 1);
 
@@ -15,7 +15,7 @@ const Tweet = ({tweet}: TweetDefinitelyExists)  => {
   return (
     <Sequence durationInFrames={end}>
       <AbsoluteFill>
-        <div className="flex flex-col h-fit p-9" ref={containerRef}>
+        <div className="flex flex-col h-fit p-8" ref={containerRef}>
           <TweetHeader tweet={tweet} />
           <TweetText tweet={tweet}/>
           <TweetVideo tweet={tweet} containerRef={containerRef} />
@@ -27,4 +27,4 @@ const Tweet = ({tweet}: TweetDefinitelyExists)  => {
   )
 }
 
-export default Tweet;
+export default VideoTweet;

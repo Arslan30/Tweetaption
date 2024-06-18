@@ -6,7 +6,7 @@ import { CompositionProps } from "../../types/constants";
 import { loadFont } from "@remotion/google-fonts/IndieFlower";
 import React from "react";
 import ClosingSeq from "./Sequences/ClosingSeq/ClosingSeq";
-import Tweet from "./Sequences/Tweet/Tweet";
+import VideoTweet from "./Sequences/Tweet/VideoTweet";
 
 loadFont();
 
@@ -17,7 +17,7 @@ export const Main = ({ tweet }: z.infer<typeof CompositionProps>) => {
   return (
     <AbsoluteFill className="bg-white">
       <ClosingSeq/>
-      <Tweet tweet={tweet} />
+      <VideoTweet tweet={tweet} />
     </AbsoluteFill>
   );
 };

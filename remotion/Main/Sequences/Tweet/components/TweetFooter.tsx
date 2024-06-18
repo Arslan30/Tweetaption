@@ -1,4 +1,4 @@
-import { TweetDefinitelyExists } from "../../../../types/constants"
+import { TweetDefinitelyExists } from "../../../../../types/constants"
 
 const TimeDisplay = ({tweet}: TweetDefinitelyExists) => {
   const date = new Date(tweet.datetime);

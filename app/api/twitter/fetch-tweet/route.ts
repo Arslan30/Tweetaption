@@ -47,8 +47,6 @@ export const POST = executeApi<FetchTweetResponse, typeof FetchTweetRequest>(
 
       // Trim twitter video URLs from text
       tweet.textHtml = tweet.textHtml.replaceAll(/<a href="[\s\S]+\/video\/\d">[\s\S]+<\/a>/g, "").trim()
-    } else {
-      throw new Error("Couldn't find video in tweet.")
     }
 
     return tweet;

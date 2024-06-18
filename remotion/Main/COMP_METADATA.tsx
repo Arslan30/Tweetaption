@@ -5,8 +5,8 @@ import { CompositionProps, DEFAULT_DURATION_IN_FRAMES, DEFAULT_VIDEO_HEIGHT, DEF
 import { z } from "zod";
 import { getVideoMetadata } from "@remotion/media-utils";
 import { createRoot } from 'react-dom/client';
-import Tweet from "./Sequences/Tweet/Tweet";
-import PureTweet from "./Sequences/Tweet/PureTweet";
+import Tweet from "./Sequences/Tweet/VideoTweet";
+import PureTweet from "./Sequences/Tweet/PureVideoTweet";
 import { resolve } from "path";
 
 const oneTimeRender = (jsx: React.ReactNode) => {
@@ -21,6 +21,8 @@ const oneTimeRender = (jsx: React.ReactNode) => {
   oneTimeRenderRoot.style.position = "absolute";
   oneTimeRenderRoot.style.top = "0";
   oneTimeRenderRoot.style.left = "0";
+  oneTimeRenderRoot.style.width = "100%";
+  oneTimeRenderRoot.style.maxWidth = "768px";
 
   body.appendChild(oneTimeRenderRoot);
   
@@ -29,6 +31,10 @@ const oneTimeRender = (jsx: React.ReactNode) => {
 
   return oneTimeRenderRoot
 
+}
+
+const makeEven = (num: number) => {
+  return num % 2 === 0 ? num : num + 1
 }
 
 export const CALCULATE_METADATA = async ({ tweet }: TweetDefinitelyExists) => {
@@ -44,18 +50,19 @@ export const CALCULATE_METADATA = async ({ tweet }: TweetDefinitelyExists) => {
     setTimeout(() => {
       setTimeout(() => {
         container.querySelector("video")!.onloadedmetadata = (event) => {
+          console.log(container.clientHeight)
           resolve(true)
         }  
       })
     })  
   })
-  const [height, width] = [container.clientHeight % 2 === 0 ? container.clientHeight : container.clientHeight+1, container.clientWidth]
+  const [height, width] = [makeEven(container.clientHeight), makeEven(container.clientWidth)]
   container.remove()
 
   return {
     durationInFrames: VIDEO_LENGTH + OUTRO_LENGTH,
     height,
-    width
+    width,
   };
 
 }

@@ -1,9 +1,9 @@
-import TweetHeader from "./TweetHeader/TweetHeader"
-import TweetText from "./TweetText"
 import { TweetDefinitelyExists } from "../../../../types/constants"
-import TweetFooter from "./TweetFooter"
+import TweetFooter from "./components/TweetFooter"
+import TweetHeader from "./components/TweetHeader/TweetHeader"
+import TweetText from "./components/TweetText"
 
-const PureTweet = ({ tweet }: TweetDefinitelyExists) => {
+const PictureTweet = ({tweet}: TweetDefinitelyExists) => {
   return (
     <div className="flex flex-col h-fit p-9">
       <TweetHeader tweet={tweet} />
@@ -19,4 +19,4 @@ const PureTweet = ({ tweet }: TweetDefinitelyExists) => {
   )
 }
 
-export default PureTweet
+export default PictureTweet
