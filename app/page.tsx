@@ -1,31 +1,80 @@
 "use client";
 
-import { Player, PlayerMethods, PlayerRef } from "@remotion/player";
+import { Player, PlayerRef } from "@remotion/player";
 import type { NextPage } from "next";
-import React, { useMemo, useRef, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Main } from "../remotion/Main/Main";
 import {
   CompositionProps,
-  DEFAULT_DURATION_IN_FRAMES,
   TweetSchema,
   VIDEO_FPS,
-  VIDEO_HEIGHT,
-  VIDEO_WIDTH,
+  TweetDefinitelyExists,
+  DEFAULT_VIDEO_WIDTH,
 } from "../types/constants";
 import { z } from "zod";
 import { TweetInput } from "../components/TweetInput";
 import Image from 'next/image'
+import { CALCULATE_METADATA } from "../remotion/Main/COMP_METADATA";
+import useAsyncRefresh from "../helpers/useAsyncRefresh";
+import { Button } from "../components/Button";
+import { FaLink } from "react-icons/fa";
 
-const Home: NextPage = () => {
-  const [tweet, setTweet] = useState<z.infer<typeof TweetSchema> | null>(null);
+
+const RenderPlayerUnmemoized = ({ tweet }: TweetDefinitelyExists) => {
   const player = useRef<PlayerRef>(null)
+
 
   const inputProps: z.infer<typeof CompositionProps> = useMemo(() => {
     player.current?.seekTo(0)
+
     return {
       tweet,
     };
-  }, [tweet?.id]);
+  }, [tweet.id]);
+
+  const { value: metadata, loading: metadataLoading } = useAsyncRefresh(async () => {
+    return await CALCULATE_METADATA({ tweet });
+  }, [tweet.id]);
+
+  if (!metadata || metadataLoading) {
+    return <div className="flex mb-4 mt-8 items-center animate-pulse justify-center w-full bg-gray-200 overflow-hidden rounded-lg" style={{ height: 600, width: "100%" }}></div>
+  }
+
+
+  return (
+    <div className="flex flex-col">
+      <div className="overflow-hidden rounded-lg border mb-4 mt-8">
+        <Player
+          ref={player}
+          component={Main}
+          inputProps={inputProps}
+          durationInFrames={metadata.durationInFrames}
+          fps={VIDEO_FPS}
+          compositionHeight={metadata.height}
+          compositionWidth={metadata.width}
+          style={{
+            // Can't use tailwind class for width since player's default styles take presedence over tailwind's,
+            // but not over inline styles
+            width: "100%",
+          }}
+          controls
+          autoPlay
+        />
+      </div>
+
+      <div className="flex w-full text-2xl justify-end">
+        <Button className="mt-4"><FaLink className="mr-3" /> Generate Download Link</Button>
+      </div>
+    </div>
+  )
+}
+
+const RenderPlayer = React.memo(RenderPlayerUnmemoized, (prevProps, nextProps) => {
+  return prevProps.tweet.id === nextProps.tweet.id
+})
+
+const Home: NextPage = () => {
+  const [tweet, setTweet] = useState<z.infer<typeof TweetSchema> | null>(null);
 
   return (
     <div>
@@ -38,24 +87,7 @@ const Home: NextPage = () => {
           setTweet={setTweet}
         ></TweetInput>
         {tweet !== null && (
-          <div className="overflow-hidden rounded-lg border mb-10 mt-8">
-            <Player
-              ref={player}
-              component={Main}
-              inputProps={inputProps}
-              durationInFrames={DEFAULT_DURATION_IN_FRAMES}
-              fps={VIDEO_FPS}
-              compositionHeight={VIDEO_HEIGHT}
-              compositionWidth={VIDEO_WIDTH}
-              style={{
-                // Can't use tailwind class for width since player's default styles take presedence over tailwind's,
-                // but not over inline styles
-                width: "100%",
-              }}
-              controls
-              autoPlay
-            />
-          </div>
+          <RenderPlayer tweet={tweet} />
         )}
       </div>
     </div>

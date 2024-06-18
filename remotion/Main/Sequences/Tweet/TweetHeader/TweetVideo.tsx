@@ -10,10 +10,7 @@ const TweetVideo = ({ tweet, containerRef }: TweetDefinitelyExists & {
       <Video
       style={{borderRadius: "3%", overflow: "hidden", height: "fit-content", width: "100%"}}
         src={tweet.videos[0].download_url}
-        onLoadedMetadata={function (meta) {
-          console.log(containerRef.current?.clientWidth, containerRef.current?.clientHeight)
-          console.log("duration:", meta.currentTarget.duration)
-        }}/>
+        />
     </div>
   )
 }

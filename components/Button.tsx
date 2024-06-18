@@ -20,7 +20,7 @@ const ButtonForward: React.ForwardRefRenderFunction<
       type={type}
       ref={ref}
       className={cn(
-        "inline-flex items-center justify-center py-1.5 appearance-none text-sm rounded w-fit px-3 font-geist min-w-fit",
+        "inline-flex items-center justify-center py-1.5 appearance-none rounded w-fit px-3 font-geist min-w-fit",
         "text-white bg-yellow-400 hover:bg-amber-400 focus:bg-yellow-500 transition duration-50",
         "disabled:bg-button-disabled-color disabled:text-disabled-text-color disabled:border-unfocused-border-color disabled:cursor-not-allowed",
         secondary

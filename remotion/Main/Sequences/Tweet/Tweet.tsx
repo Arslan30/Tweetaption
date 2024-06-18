@@ -1,4 +1,4 @@
-import { AbsoluteFill, Sequence, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Sequence, useVideoConfig } from "remotion";
 import TweetHeader from "./TweetHeader/TweetHeader";
 import { TweetDefinitelyExists } from "../../../../types/constants";
 import TweetText from "./TweetText";

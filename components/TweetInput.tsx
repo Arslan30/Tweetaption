@@ -41,6 +41,7 @@ export const TweetInput: React.FC<{
                     try {
                       const tweet = await fetchTweet(tweetId)
                       setTweet(tweet);
+                      setError(null);
                     } catch (e) {
                       setTweet(null);
                       setError((e as any).message)

@@ -35,27 +35,3 @@
     }
   }
 }
-
-@font-face {
-  font-family: Chirp;
-  font-weight: 400;
-  src: url(/fonts/chirp-regular-web.woff) format("woff");
-}
-@font-face {
-  font-family: Chirp;
-  font-weight: 700;
-  src: url(/fonts/chirp-bold-web.woff) format("woff");
-}
-
-img[src*="emoji"] {
-  width: 1.2em;
-  height: 1.2em;
-  margin-right: 0.075em;
-  margin-left: 0.075em;
-  vertical-align: -20%;
-  display: inline-block;
-}
-
-svg[data-testid="icon-verified"] {
-  display: none
-}

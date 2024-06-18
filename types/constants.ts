@@ -1,7 +1,5 @@
-import { CalculateMetadataFunction } from "remotion";
 import { z } from "zod";
 export const COMP_NAME = "Main";
-import { getVideoMetadata } from "@remotion/media-utils";
 
 export const TweetSchema = z.object({
   id: z.string(),
@@ -34,28 +32,32 @@ export const CompositionProps = z.object({
 });
 
 export const defaultMainProps: z.infer<typeof CompositionProps> = {
-  tweet: null
+  tweet: {
+    "id": "1800884147705315751",
+    "nameHtml": "Imran Khan",
+    "handler": "@ImranKhanPTI",
+    "avatarUrl": "https://pbs.twimg.com/profile_images/1548735070030204929/SE6zZzFV.jpg",
+    "textHtml": "عمران خان صاحب نے علامہ اقبال کا یہ پیغام دوبارہ قوم تک پہنچانے کا کہا ہے:\n“ہے جرم ضعیفی کی سزا مرگ مفاجات” <a href=\"https://twitter.com/ImranKhanPTI/status/1800884147705315751/video/1\">pic.twitter.com/ullT4N77Nf</a>",
+    "verified": true,
+    "url": "https://twitter.com/ImranKhanPTI/status/1800884147705315751",
+    "photos": [],
+    "videos": [
+        {
+            "poster": "https://pbs.twimg.com/amplify_video_thumb/1800884084370993152/img/EnpLom96qv8Ef1Za.jpg",
+            "download_url": "https://video.twimg.com/amplify_video/1800884084370993152/vid/avc1/1080x1080/kS1Ce-q3QJFf0PA1.mp4?tag=16"
+        }
+    ],
+    "likes": 42145,
+    "quotes": 0,
+    "retweets": 21092,
+    "replies": 0,
+    "datetime": "2024-06-12T13:33:34.000Z",
+    "index": 0
+}
 };
 
-export const DEFAULT_DURATION_IN_FRAMES = 2000;
-export const VIDEO_WIDTH = 1080;
-export const VIDEO_HEIGHT = 1400;
+export const DEFAULT_DURATION_IN_FRAMES = 150;
+export const DEFAULT_VIDEO_WIDTH = 1080;
+export const DEFAULT_VIDEO_HEIGHT = 1400;
 export const VIDEO_FPS = 30;
 export const OUTRO_DURATION_IN_FRAMES = 1 * VIDEO_FPS;
-
-export const CALCULATE_METADATA_OF_COMPOSITION: CalculateMetadataFunction<z.infer<typeof CompositionProps>> = async ({ props }) => {
-  if (!props.tweet) {
-    return {
-      durationInFrames: 0,
-    };
-  }
-
-  const data = await getVideoMetadata(props.tweet.videos[0].download_url);
-
-  const OUTRO_LENGTH = 1 * VIDEO_FPS;
-  const VIDEO_LENGTH = data.durationInSeconds * VIDEO_FPS;
-  
-  return {
-    durationInFrames: VIDEO_LENGTH + OUTRO_LENGTH,
-  };
-}
