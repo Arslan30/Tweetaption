@@ -13,21 +13,21 @@ const TimeDisplay = ({tweet}: TweetDefinitelyExists) => {
   )
 }
 
-const Stat = ({
-  value,
-  text
-}: {
-  value: string
-  text: string
-}) => {
-  return (
-    <div className="flex items-center whitespace-nowrap gap-[0.25em]">
-      <strong>{value}</strong>
-      <span style={{ color: 'rgb(91, 112, 131)' }}>{text}</span>
-    </div>
+// const Stat = ({
+//   value,
+//   text
+// }: {
+//   value: string
+//   text: string
+// }) => {
+//   return (
+//     <div className="flex items-center whitespace-nowrap gap-[0.25em]">
+//       <strong>{value}</strong>
+//       <span style={{ color: 'rgb(91, 112, 131)' }}>{text}</span>
+//     </div>
 
-  )
-}
+//   )
+// }
 
 // const StatsDisplay = ({tweet}: TweetDefinitelyExists) => {
 //   function formatNumber(num: number) {
