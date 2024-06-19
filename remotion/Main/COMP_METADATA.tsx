@@ -44,17 +44,30 @@ export const CALCULATE_METADATA = async ({ tweet }: TweetDefinitelyExists) => {
   const VIDEO_LENGTH = Math.ceil(data.durationInSeconds) * VIDEO_FPS;
 
   const container = oneTimeRender(<PureTweet tweet={tweet}/>)
+  
   await new Promise((resolve) => {
-    setTimeout(() => {
-      setTimeout(() => {
-        container.querySelector("video")!.onloadedmetadata = (event) => {
-          console.log(container.clientHeight)
-          resolve(true)
-        }  
-      })
-    })  
+    const intervalId = setInterval(() => {
+      const video = container.querySelector("video")
+      console.log("Waiting for video to mount...")
+      if (video) {
+        setTimeout(() => {
+          video.onloadedmetadata = () => {
+            console.warn("onloadedmetadata still available")
+          }
+          video.onloadeddata = () => {
+            console.warn("onloadeddata still available")
+          }
+
+          console.log("Video mounted,", `${video.clientWidth}x${video.clientHeight}`)
+          clearInterval(intervalId)
+          resolve(true)  
+        }, 500)
+      }
+    }, 200)
   })
+
   const [height, width] = [makeEven(container.clientHeight), makeEven(container.clientWidth)]
+
   container.remove()
 
   return {
