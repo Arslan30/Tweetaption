@@ -72,7 +72,9 @@ const Home: NextPage = () => {
   return (
     <div className="flex flex-col py-3 mb-5 px-4 w-full gap-6">
       <div className="flex mb-6 mt-2 mx-auto w-full" style={{ maxWidth: "var(--max-frame-width)" }}>
-        <Image src="/logo.png" alt="logo" width={120} height={120} />
+        <a href="/">
+         <Image src="/logo.png" alt="logo" width={120} height={120} />
+        </a>
       </div>
       <div style={{ maxWidth: "var(--max-frame-width)" }} className="text-5xl font-geist text-amber-500 font-bold mx-auto">{"Grab any tweet's video, without losing context."}</div>
       <div className="flex flex-col w-full mx-auto" style={{ maxWidth: "var(--max-frame-width)" }}>

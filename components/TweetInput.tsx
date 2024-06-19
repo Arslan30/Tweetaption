@@ -55,7 +55,10 @@ export const TweetInput: React.FC<{
   return (
     <div className="flex flex-col">
       <form name="pull-tweet" onSubmit={e => e.preventDefault()}>
-      <div className={clsx("flex border transition bg-white focus-within:shadow-none focus-within:border-yellow-200 shadow-lg focus-within:bg-white p-2 rounded-md", tweet && "!shadow-none")}>
+        <div className={clsx(
+          "flex border transition bg-white focus-within:border-yellow-200 focus-within:bg-white p-2 rounded-md",
+          (tweet === null && !tweetLoading) ? "shadow-lg focus-within:shadow-none" : "shadow-none"
+        )}>
 
           {(
             <>
