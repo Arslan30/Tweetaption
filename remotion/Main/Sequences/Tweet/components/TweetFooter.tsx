@@ -47,7 +47,7 @@ const TimeDisplay = ({tweet}: TweetDefinitelyExists) => {
 
 const TweetFooter = ({tweet}: TweetDefinitelyExists) => {
   return (
-    <div className="flex flex-col mt-5 text-tweet-sm font-tweet font-thin">
+    <div className="flex flex-col mt-5 text-tweet-sm font-tweet">
       <TimeDisplay tweet={tweet} />
     </div>
   )
