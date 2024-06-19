@@ -22,7 +22,7 @@ const oneTimeRender = (jsx: React.ReactNode) => {
   oneTimeRenderRoot.style.top = "0";
   oneTimeRenderRoot.style.left = "0";
   oneTimeRenderRoot.style.width = "100%";
-  oneTimeRenderRoot.style.maxWidth = "768px";
+  oneTimeRenderRoot.style.maxWidth = "var(--max-frame-width)";
 
   body.appendChild(oneTimeRenderRoot);
   

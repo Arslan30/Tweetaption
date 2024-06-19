@@ -38,7 +38,7 @@ const StatsDisplay = ({tweet}: TweetDefinitelyExists) => {
   }
   
   return (
-    <div className="flex items-center" style={{ gap: '0.9em', marginTop: '0.5em', width: '100%' }}>
+    <div className="flex items-center" style={{ gap: '0.9em', marginTop: '0.4em', width: '100%' }}>
       <Stat value={formatNumber(tweet.retweets)} text="Retweets" />
       <Stat value={formatNumber(tweet.likes)} text="Likes" />
     </div>
@@ -47,7 +47,7 @@ const StatsDisplay = ({tweet}: TweetDefinitelyExists) => {
 
 const TweetFooter = ({tweet}: TweetDefinitelyExists) => {
   return (
-    <div className="flex flex-col mt-5 text-tweet-sm">
+    <div className="flex flex-col mt-5 text-tweet-sm font-tweet">
       <TimeDisplay tweet={tweet} />
       <StatsDisplay tweet={tweet} />
     </div>

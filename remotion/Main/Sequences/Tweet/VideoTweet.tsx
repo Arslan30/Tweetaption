@@ -15,7 +15,7 @@ const VideoTweet = ({tweet}: TweetDefinitelyExists)  => {
   return (
     <Sequence durationInFrames={end}>
       <AbsoluteFill>
-        <div className="flex flex-col h-fit p-8" ref={containerRef}>
+        <div className="flex flex-col h-fit p-6" ref={containerRef}>
           <TweetHeader tweet={tweet} />
           <TweetText tweet={tweet}/>
           <TweetVideo tweet={tweet} containerRef={containerRef} />

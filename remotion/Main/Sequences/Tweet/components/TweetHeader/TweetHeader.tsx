@@ -4,7 +4,7 @@ import VerifiedIcon from "./VerifiedIcon"
 const TweetAuthorName = ({ tweet }: TweetDefinitelyExists) => {
   return (
     <div style={{ display: 'flex', fontWeight: 700, gap: '4px', alignItems: 'center' }}>
-      <div style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}>{tweet.nameHtml}</div>
+      <div style={{ whiteSpace: 'nowrap' }}>{tweet.nameHtml}</div>
       <VerifiedIcon />
     </div>
 
@@ -24,7 +24,7 @@ const TweetHeader = ({ tweet }: TweetDefinitelyExists) => {
         className="border"
         style={{ width: AVATAR_SIZE, height: AVATAR_SIZE, borderRadius: '9999px' }}
       />
-      <div className="flex flex-col" style={{ gap: GAP_BETWEEN_NAME_AND_HANDLE, overflow: 'hidden', lineHeight: "1em" }}>
+      <div className="flex flex-col" style={{ gap: GAP_BETWEEN_NAME_AND_HANDLE, lineHeight: "1em" }}>
         <TweetAuthorName tweet={tweet} />
         <div style={{ color: 'rgb(91, 112, 131)' }}>{tweet.handler}</div>
       </div>

@@ -3,12 +3,13 @@ import { executeApi } from "../../../../helpers/api-response";
 import { TweetSchema } from "../../../../types/constants";
 import { FetchTweetRequest, FetchTweetResponse } from "../../../../types/schema";
 import { parse } from 'node-html-parser';
+import { MediaVideo, getTweet, type Tweet } from 'react-tweet/api'
 
 export const POST = executeApi<FetchTweetResponse, typeof FetchTweetRequest>(
   FetchTweetRequest,
   async (req, body) => {
     console.log(`🔍 Fetching tweet ${body.tweetId}...`)
-    
+
     const tweetApiResponse = await fetch(`https://tweethunter.io/api/thread?tweetId=${body.tweetId}`, {
       method: 'GET',
       headers: {
@@ -31,22 +32,20 @@ export const POST = executeApi<FetchTweetResponse, typeof FetchTweetRequest>(
     const tweet = tweetApiResponse[0] as z.infer<typeof TweetSchema>
 
     if (tweet.videos.length > 0) {
-      // Load video URLs
-      await fetch("https://info.tweeload.site/result/" + tweet.id, {
-        method: "POST"
-      })
-      .then(response => response.text())
-      .then(text => {
-        console.log(`✅ Successfully fetched video URL ${body.tweetId}!`)
-        const virtualDoc = parse(text)
+      await getTweet(tweet.id)
+        .then(tweetX => {
+          tweetX?.mediaDetails?.filter(media => media.type === "video").forEach((video, i) => {
+            const variants = (video as MediaVideo).video_info.variants.filter(variant => variant.content_type === "video/mp4")
+            const best_bitrate = Math.max(...variants.map(variant => variant.bitrate ?? 0))
 
-        virtualDoc.querySelectorAll(".video").forEach((video, i) => {
-          tweet.videos[i].download_url = video.getAttribute("video-url") ?? ""
+            tweet.videos[i].download_url = variants.find(variant => variant.bitrate === best_bitrate)!.url
+          })
         })
-      })
 
       // Trim twitter video URLs from text
       tweet.textHtml = tweet.textHtml.replaceAll(/<a href="[\s\S]+\/video\/\d">[\s\S]+<\/a>/g, "").trim()
+    } else {
+      throw new Error("Couldn't find video in tweet.")
     }
 
     return tweet;

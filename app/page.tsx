@@ -71,11 +71,12 @@ const Home: NextPage = () => {
   const [tweet, setTweet] = useState<z.infer<typeof TweetSchema> | null>(null);
 
   return (
-    <div>
-      <div className="flex flex-col py-3 max-w-screen-md m-auto mb-5 px-4">
-        <div className="flex mb-8 mt-2">
-          <Image src="/logo.png" alt="logo" width={100} height={100} />
-        </div>
+    <div className="flex flex-col py-3 mb-5 px-4 w-full gap-6">
+      <div className="flex mb-6 mt-2 mx-auto w-full" style={{ maxWidth: "var(--max-frame-width)" }}>
+        <Image src="/logo.png" alt="logo" width={120} height={120} />
+      </div>
+      <div style={{ maxWidth: "var(--max-frame-width)" }} className="text-5xl font-geist text-amber-500 font-bold mx-auto">Grab any tweet's video, without losing context.</div>
+      <div className="flex flex-col w-full mx-auto" style={{ maxWidth: "var(--max-frame-width)" }}>
         <TweetInput
           tweet={tweet}
           setTweet={setTweet}
@@ -88,6 +89,11 @@ const Home: NextPage = () => {
             )
         )}
       </div>
+      {tweet === null && (
+        <div className="flex w-full mx-auto max-w-screen-lg mt-4">
+          <img src="/demo.gif" className="w-full" style={{ objectFit: "cover" }}></img>
+        </div>
+      )}
     </div>
   );
 };

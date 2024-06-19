@@ -5,7 +5,7 @@ import TweetFooter from "./components/TweetFooter"
 
 const PureVideoTweet = ({ tweet }: TweetDefinitelyExists) => {
   return (
-    <div className="flex flex-col h-fit p-8">
+    <div className="flex flex-col h-fit p-6">
       <TweetHeader tweet={tweet} />
       <TweetText tweet={tweet} />
       <div className="flex h-fit mt-[1em]">

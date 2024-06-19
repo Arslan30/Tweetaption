@@ -5,6 +5,7 @@ import { ErrorComp } from "./Error";
 import { Input } from "./Input";
 import { useState } from "react";
 import { fetchTweet } from "../lambda/api";
+import clsx from "clsx";
 
 export const TweetInput: React.FC<{
   tweet: z.infer<typeof TweetSchema> | null;
@@ -18,7 +19,7 @@ export const TweetInput: React.FC<{
   return (
     <div className="flex flex-col">
       <form name="pull-tweet" onSubmit={e => e.preventDefault()}>
-      <div className="flex border transition focus-within:border-yellow-200 bg-yellow-50 focus-within:bg-white p-2 rounded">
+      <div className={clsx("flex border transition bg-white focus-within:shadow-none focus-within:border-yellow-200 shadow-lg focus-within:bg-white p-2 rounded-md", tweet && "!shadow-none")}>
 
           {(
             <>
