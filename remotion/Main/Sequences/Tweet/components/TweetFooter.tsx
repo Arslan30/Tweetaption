@@ -47,9 +47,8 @@ const StatsDisplay = ({tweet}: TweetDefinitelyExists) => {
 
 const TweetFooter = ({tweet}: TweetDefinitelyExists) => {
   return (
-    <div className="flex flex-col mt-5 text-tweet-sm font-tweet">
+    <div className="flex flex-col mt-5 text-tweet-sm font-tweet font-thin">
       <TimeDisplay tweet={tweet} />
-      <StatsDisplay tweet={tweet} />
     </div>
   )
 }
