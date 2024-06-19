@@ -2,8 +2,7 @@ import { z } from "zod";
 import { executeApi } from "../../../../helpers/api-response";
 import { TweetSchema } from "../../../../types/constants";
 import { FetchTweetRequest, FetchTweetResponse } from "../../../../types/schema";
-import { parse } from 'node-html-parser';
-import { MediaVideo, getTweet, type Tweet } from 'react-tweet/api'
+import { MediaVideo, getTweet } from 'react-tweet/api'
 
 export const POST = executeApi<FetchTweetResponse, typeof FetchTweetRequest>(
   FetchTweetRequest,

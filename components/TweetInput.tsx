@@ -6,7 +6,7 @@ import { Input } from "./Input";
 import { useEffect, useState } from "react";
 import { fetchTweet } from "../lambda/api";
 import clsx from "clsx";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export const TweetInput: React.FC<{
   tweet: z.infer<typeof TweetSchema> | null;

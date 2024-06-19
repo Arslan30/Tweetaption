@@ -5,9 +5,7 @@ import { CompositionProps, DEFAULT_DURATION_IN_FRAMES, DEFAULT_VIDEO_HEIGHT, DEF
 import { z } from "zod";
 import { getVideoMetadata } from "@remotion/media-utils";
 import { createRoot } from 'react-dom/client';
-import Tweet from "./Sequences/Tweet/VideoTweet";
 import PureTweet from "./Sequences/Tweet/PureVideoTweet";
-import { resolve } from "path";
 
 const oneTimeRender = (jsx: React.ReactNode) => {
   const body = document.querySelector("body")
