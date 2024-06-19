@@ -29,21 +29,21 @@ const Stat = ({
   )
 }
 
-const StatsDisplay = ({tweet}: TweetDefinitelyExists) => {
-  function formatNumber(num: number) {
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
-    }
-    return num.toString();
-  }
+// const StatsDisplay = ({tweet}: TweetDefinitelyExists) => {
+//   function formatNumber(num: number) {
+//     if (num >= 1000) {
+//       return (num / 1000).toFixed(1) + 'K';
+//     }
+//     return num.toString();
+//   }
   
-  return (
-    <div className="flex items-center" style={{ gap: '0.9em', marginTop: '0.4em', width: '100%' }}>
-      <Stat value={formatNumber(tweet.retweets)} text="Retweets" />
-      <Stat value={formatNumber(tweet.likes)} text="Likes" />
-    </div>
-  )
-}
+//   return (
+//     <div className="flex items-center" style={{ gap: '0.9em', marginTop: '0.4em', width: '100%' }}>
+//       <Stat value={formatNumber(tweet.retweets)} text="Retweets" />
+//       <Stat value={formatNumber(tweet.likes)} text="Likes" />
+//     </div>
+//   )
+// }
 
 const TweetFooter = ({tweet}: TweetDefinitelyExists) => {
   return (
