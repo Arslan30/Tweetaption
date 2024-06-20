@@ -6,7 +6,7 @@ import { PureTweetVideo } from "./components/TweetVideo"
 
 const PureVideoTweet = ({ tweet }: TweetDefinitelyExists) => {
   return (
-    <div className="flex flex-col h-fit p-6 bg-white">
+    <div className="flex flex-col h-fit p-6 bg-white w-full">
       <TweetHeader tweet={tweet} />
       <TweetText tweet={tweet} />
       <PureTweetVideo tweet={tweet} />

@@ -12,7 +12,7 @@ const VideoTweet = ({ tweet }: TweetDefinitelyExists) => {
   return (
     <Sequence durationInFrames={end}>
       <AbsoluteFill>
-        <div className="flex flex-col h-fit p-6 bg-white">
+        <div className="flex flex-col h-fit p-6 bg-white w-full">
           <Freeze frame={fps} >
             <TweetHeader tweet={tweet} />
             <TweetText tweet={tweet} />
