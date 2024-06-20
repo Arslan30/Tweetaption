@@ -29,7 +29,7 @@ export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
       );
     }
 
-    const tweet = await getTweetById(body.id);
+    const tweet = await getTweetById(body.tweetId);
 
     const inputProps: TweetDefinitelyExists = {
       tweet
