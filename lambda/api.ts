@@ -6,7 +6,6 @@ import {
   ProgressResponse,
   RenderRequest,
 } from "../types/schema";
-import { CompositionProps } from "../types/constants";
 import { ApiResponse } from "../helpers/api-response";
 
 const makeRequest = async <Res>(
@@ -30,14 +29,14 @@ const makeRequest = async <Res>(
 
 export const renderVideo = async ({
   id,
-  inputProps,
+  tweetId,
 }: {
-  id: string;
-  inputProps: z.infer<typeof CompositionProps>;
+  id: string
+  tweetId: string
 }) => {
   const body: z.infer<typeof RenderRequest> = {
     id,
-    inputProps,
+    tweetId,
   };
 
   return makeRequest<RenderMediaOnLambdaOutput>("/api/lambda/render", body);
