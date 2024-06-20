@@ -32,7 +32,7 @@ export const TweetInput: React.FC<{
         const tweetId = BigInt(tweetIdString).toString()
         setTweetLoading(true);
         try {
-          const tweet = await fetchTweet(tweetId)
+          const tweet = await fetchTweet({tweetId})
           setTweet(tweet);
           setError(null);
           console.log(router.push("/?url=" + tweetUrlInput))

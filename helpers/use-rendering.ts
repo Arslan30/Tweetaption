@@ -48,7 +48,7 @@ export const useRendering = (
       status: "invoking",
     });
     try {
-      const { renderId, bucketName } = await renderVideo({ id, inputProps });
+      const { renderId, bucketName } = await renderVideo({ id, tweetId: inputProps.tweet!.id });
       setState({
         status: "rendering",
         progress: 0,

@@ -9,7 +9,6 @@ export const TweetSchema = z.object({
   textHtml: z.string(),
   verified: z.boolean(),
   url: z.string().url(),
-  photos: z.array(z.string().url()), // Assuming photos URLs are stored as strings
   videos: z.array(z.object({
     poster: z.string().url(),
     download_url: z.string().url(),
@@ -19,7 +18,6 @@ export const TweetSchema = z.object({
   retweets: z.number(),
   replies: z.number(),
   datetime: z.string(), // You might want to use z.date() if you plan to convert strings to Date objects
-  index: z.number()
 });
 
 export type TweetDefinitelyExists = {
@@ -40,7 +38,6 @@ export const defaultMainProps: z.infer<typeof CompositionProps> = {
     "textHtml": "عمران خان صاحب نے علامہ اقبال کا یہ پیغام دوبارہ قوم تک پہنچانے کا کہا ہے:\n“ہے جرم ضعیفی کی سزا مرگ مفاجات” <a href=\"https://twitter.com/ImranKhanPTI/status/1800884147705315751/video/1\">pic.twitter.com/ullT4N77Nf</a>",
     "verified": true,
     "url": "https://twitter.com/ImranKhanPTI/status/1800884147705315751",
-    "photos": [],
     "videos": [
         {
             "poster": "https://pbs.twimg.com/amplify_video_thumb/1800884084370993152/img/EnpLom96qv8Ef1Za.jpg",
@@ -52,7 +49,6 @@ export const defaultMainProps: z.infer<typeof CompositionProps> = {
     "retweets": 21092,
     "replies": 0,
     "datetime": "2024-06-12T13:33:34.000Z",
-    "index": 0
 }
 };
 

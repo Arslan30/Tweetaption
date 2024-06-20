@@ -1,12 +1,12 @@
 import { z } from "zod";
 import type { RenderMediaOnLambdaOutput } from "@remotion/lambda/client";
 import {
+  FetchTweetRequest,
   FetchTweetResponse,
   ProgressRequest,
   ProgressResponse,
   RenderRequest,
 } from "../types/schema";
-import { CompositionProps } from "../types/constants";
 import { ApiResponse } from "../helpers/api-response";
 
 const makeRequest = async <Res>(
@@ -30,38 +30,26 @@ const makeRequest = async <Res>(
 
 export const renderVideo = async ({
   id,
-  inputProps,
-}: {
-  id: string;
-  inputProps: z.infer<typeof CompositionProps>;
-}) => {
-  const body: z.infer<typeof RenderRequest> = {
+  tweetId,
+}: z.infer<typeof RenderRequest>) => {
+  return makeRequest<RenderMediaOnLambdaOutput>("/api/lambda/render", {
     id,
-    inputProps,
-  };
-
-  return makeRequest<RenderMediaOnLambdaOutput>("/api/lambda/render", body);
+    tweetId
+  });
 };
 
 export const getProgress = async ({
   id,
   bucketName,
-}: {
-  id: string;
-  bucketName: string;
-}) => {
-  const body: z.infer<typeof ProgressRequest> = {
+}: z.infer<typeof ProgressRequest>) => {
+  return makeRequest<ProgressResponse>("/api/lambda/progress", {
     id,
-    bucketName,
-  };
-
-  return makeRequest<ProgressResponse>("/api/lambda/progress", body);
+    bucketName
+  });
 };
 
-export const fetchTweet = async (tweetId: string) => {
-  const body = {
-    tweetId,
-  };
-
-  return makeRequest<FetchTweetResponse>("/api/twitter/fetch-tweet", body);
+export const fetchTweet = async ({tweetId}: z.infer<typeof FetchTweetRequest>) => {
+  return makeRequest<FetchTweetResponse>("/api/twitter/fetch-tweet", {
+    tweetId
+  });
 }

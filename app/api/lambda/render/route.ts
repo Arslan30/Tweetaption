@@ -6,6 +6,8 @@ import {
 import { DISK, RAM, REGION, SITE_NAME, TIMEOUT } from "../../../../config.mjs";
 import { executeApi } from "../../../../helpers/api-response";
 import { RenderRequest } from "../../../../types/schema";
+import { TweetDefinitelyExists } from "../../../../types/constants";
+import { getTweetById } from "../../twitter/fetch-tweet/getTweetById";
 
 export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
   RenderRequest,
@@ -27,6 +29,12 @@ export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
       );
     }
 
+    const tweet = await getTweetById(body.id);
+
+    const inputProps: TweetDefinitelyExists = {
+      tweet
+    }
+
     const result = await renderMediaOnLambda({
       codec: "h264",
       functionName: speculateFunctionName({
@@ -37,7 +45,7 @@ export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
       region: REGION as AwsRegion,
       serveUrl: SITE_NAME,
       composition: body.id,
-      inputProps: body.inputProps,
+      inputProps,
       downloadBehavior: {
         type: "download",
         fileName: "video.mp4",
