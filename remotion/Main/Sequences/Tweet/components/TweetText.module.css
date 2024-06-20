@@ -3,3 +3,8 @@
   width: 1em;
   height: 1em;
 }
+
+.TweetText a {
+  color: #1b95e0;
+  direction: auto;
+}

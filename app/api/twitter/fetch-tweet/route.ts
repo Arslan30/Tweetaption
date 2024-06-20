@@ -3,6 +3,7 @@ import { executeApi } from "../../../../helpers/api-response";
 import { TweetSchema } from "../../../../types/constants";
 import { FetchTweetRequest, FetchTweetResponse } from "../../../../types/schema";
 import { MediaVideo, getTweet } from 'react-tweet/api'
+import { parse } from 'node-html-parser';
 
 export const POST = executeApi<FetchTweetResponse, typeof FetchTweetRequest>(
   FetchTweetRequest,
@@ -41,8 +42,15 @@ export const POST = executeApi<FetchTweetResponse, typeof FetchTweetRequest>(
           })
         })
 
-      // Trim twitter video URLs from text
-      tweet.textHtml = tweet.textHtml.replaceAll(/<a href="[\s\S]+\/video\/\d">[\s\S]+<\/a>/g, "").trim()
+        const doc = parse(tweet.textHtml)
+        doc.querySelectorAll('a').forEach(a => {
+          if (a.getAttribute('href')!.match(/https:\/\/((twitter)|x).com\/[A-Za-z0-9_]+\/status\/[\d]+\/video\/\d/g)) {
+            a.remove()
+          } else {
+            a.setAttribute('dir', 'auto')
+          }
+        })
+        tweet.textHtml = doc.innerHTML.trim()
     } else {
       throw new Error("Couldn't find video in tweet.")
     }
