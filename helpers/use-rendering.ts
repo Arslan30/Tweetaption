@@ -48,7 +48,7 @@ export const useRendering = (
       status: "invoking",
     });
     try {
-      const { renderId, bucketName } = await renderVideo({ id, tweetId: inputProps.tweet!.id});
+      const { renderId, bucketName } = await renderVideo({ id, inputProps });
       setState({
         status: "rendering",
         progress: 0,
@@ -100,7 +100,7 @@ export const useRendering = (
         renderId: null,
       });
     }
-  }, [id, inputProps.tweet!.id]);
+  }, [id, inputProps]);
 
   const undo = useCallback(() => {
     setState({ status: "init" });

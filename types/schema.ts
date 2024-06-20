@@ -1,9 +1,9 @@
 import { z } from "zod";
-import { TweetSchema } from "./constants";
+import { CompositionProps, TweetSchema } from "./constants";
 
 export const RenderRequest = z.object({
   id: z.string(),
-  tweetId: z.string(),
+  inputProps: CompositionProps,
 });
 
 export const ProgressRequest = z.object({
