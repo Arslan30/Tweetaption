@@ -1,3 +1,4 @@
+import React from "react"
 import { TweetDefinitelyExists } from "../../../../../../types/constants"
 import VerifiedIcon from "./VerifiedIcon"
 
@@ -11,7 +12,7 @@ const TweetAuthorName = ({ tweet }: TweetDefinitelyExists) => {
   )
 }
 
-const TweetHeader = ({ tweet }: TweetDefinitelyExists) => {
+const TweetHeaderUnMemoized = ({ tweet }: TweetDefinitelyExists) => {
   const GAP_BETWEEN_AVATAR_AND_TEXT = '0.6em'
   const GAP_BETWEEN_NAME_AND_HANDLE = '0.4em'
   const AVATAR_SIZE = `calc(1em * 2 + ${GAP_BETWEEN_NAME_AND_HANDLE} + 0.5em)`
@@ -31,5 +32,7 @@ const TweetHeader = ({ tweet }: TweetDefinitelyExists) => {
     </div>
   )
 }
+
+const TweetHeader = React.memo(TweetHeaderUnMemoized, (prevProps, nextProps) => prevProps.tweet.id === nextProps.tweet.id)
 
 export default TweetHeader

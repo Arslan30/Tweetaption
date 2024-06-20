@@ -1,3 +1,4 @@
+import React from "react";
 import { TweetDefinitelyExists } from "../../../../../types/constants"
 
 const TimeDisplay = ({tweet}: TweetDefinitelyExists) => {
@@ -45,12 +46,14 @@ const TimeDisplay = ({tweet}: TweetDefinitelyExists) => {
 //   )
 // }
 
-const TweetFooter = ({tweet}: TweetDefinitelyExists) => {
+const TweetFooterUnMemoized = ({tweet}: TweetDefinitelyExists) => {
   return (
     <div className="flex flex-col mt-5 text-tweet-sm font-tweet">
       <TimeDisplay tweet={tweet} />
     </div>
   )
 }
+
+const TweetFooter = React.memo(TweetFooterUnMemoized, (prevProps, nextProps) => prevProps.tweet.id === nextProps.tweet.id)
 
 export default TweetFooter;
