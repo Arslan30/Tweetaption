@@ -16,8 +16,6 @@ import Image from 'next/image'
 import { CALCULATE_METADATA } from "../remotion/Main/COMP_METADATA";
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
 import { RenderControls } from "../components/RenderControls";
-import PictureTweet from "../remotion/Main/Sequences/Tweet/PictureTweet";
-import TextTweet from "../remotion/Main/Sequences/Tweet/TextTweet";
 
 
 const RenderPlayer = ({ tweet }: TweetDefinitelyExists) => {
@@ -83,11 +81,7 @@ const Home: NextPage = () => {
           setTweet={setTweet}
         ></TweetInput>
         {tweet !== null && (
-          tweet.videos.length > 0 ?
-            <RenderPlayer tweet={tweet} /> : (tweet.photos.length > 0 ?
-              <PictureTweet tweet={tweet} /> :
-              <TextTweet tweet={tweet} />
-            )
+          <RenderPlayer tweet={tweet} />
         )}
       </div>
       {tweet === null && (
