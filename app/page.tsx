@@ -21,7 +21,6 @@ import { RenderControls } from "../components/RenderControls";
 const RenderPlayer = ({ tweet }: TweetDefinitelyExists) => {
   const player = useRef<PlayerRef>(null)
 
-
   const inputProps: z.infer<typeof CompositionProps> = useMemo(() => {
     player.current?.seekTo(0)
 

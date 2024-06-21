@@ -1,4 +1,4 @@
-import { MediaVideo, fetchTweet, getTweet } from "react-tweet/api"
+import { MediaVideo, getTweet } from "react-tweet/api"
 import { TweetSchema } from "../../../../types/constants";
 import { z } from "zod";
 import parse from "node-html-parser";
@@ -21,7 +21,7 @@ export const getTweetById = async (tweetId: string) => {
     throw new Error("Couldn't find tweet, maybe it got deleted?")
   }
 
-  await fetchTweet(tweetId)
+  console.log((await getTweet(tweetApiResponse[0].id))?.entities.media)
 
   const tweet = tweetApiResponse[0] as z.infer<typeof TweetSchema>
 
@@ -45,6 +45,8 @@ export const getTweetById = async (tweetId: string) => {
         }
       })
       tweet.textHtml = doc.innerHTML.trim()
+  } else {
+    throw new Error("Couldn't find video in tweet.")
   }
 
   return tweet
