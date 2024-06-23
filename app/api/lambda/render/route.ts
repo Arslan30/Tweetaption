@@ -8,8 +8,12 @@ import { executeApi } from "../../../../helpers/api-response";
 import { RenderRequest } from "../../../../types/schema";
 import { TweetDefinitelyExists } from "../../../../types/constants";
 import { getTweetById } from "../../twitter/fetch-tweet/getTweetById";
+import { supabase } from "../../supabase";
 
-export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
+export const POST = executeApi<{
+  bucketName: string;
+  renderId: string;
+}, typeof RenderRequest>(
   RenderRequest,
   async (req, body) => {
     if (
@@ -27,6 +31,20 @@ export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
       throw new TypeError(
         "The environment variable REMOTION_AWS_SECRET_ACCESS_KEY is missing. Add it to your .env file.",
       );
+    }
+
+
+    const { data: renders } = await supabase
+      .from('renders')
+      .select("*")
+      .eq('tweet_id', body.tweetId)
+      .not("video_url", "is", null)
+
+    if (renders && renders.length > 0) {
+      return {
+        bucketName: renders[0].bucket_name,
+        renderId: renders[0].render_id,
+      }
     }
 
     const tweet = await getTweetById(body.tweetId);
@@ -48,10 +66,25 @@ export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
       inputProps,
       downloadBehavior: {
         type: "download",
-        fileName: "video.mp4",
+        fileName: `${body.tweetId}.mp4`,
       },
     });
 
-    return result;
+    await supabase
+      .from('renders')
+      .insert([
+        {
+          render_id: result.renderId,
+          bucket_name: result.bucketName,
+          tweet_id: body.tweetId,
+          tweet: tweet,
+        }
+      ])
+      .select()
+
+    return {
+      bucketName: result.bucketName,
+      renderId: result.renderId,
+    };
   },
 );
