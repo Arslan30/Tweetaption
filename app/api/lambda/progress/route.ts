@@ -36,7 +36,7 @@ export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
           {
             video_url: renderProgress.outputFile as string,
             size: renderProgress.outputSizeInBytes as number,
-            generated_at: new Date(),
+            generated_at: new Date(renderProgress.renderMetadata!.startedDate + (renderProgress.timeToFinish ?? 0)),
           }
         )
         .eq('render_id', body.id)
