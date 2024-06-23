@@ -1,5 +1,6 @@
 import "../styles/global.css";
 import { Metadata } from "next";
+import PlausibleProvider from 'next-plausible'
 
 export const metadata: Metadata = {
   title: "tweeto.lol",
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script defer data-domain="tweeto.lol" src="https://plausible.io/js/script.js" />
+        <PlausibleProvider domain="tweeto.lol" />
       </head>
       <body className="bg-white">{children}</body>
     </html>
