@@ -21,8 +21,6 @@ export const getTweetById = async (tweetId: string) => {
     throw new Error("Couldn't find tweet, maybe it got deleted?")
   }
 
-  console.log((await getTweet(tweetApiResponse[0].id))?.entities.media)
-
   const tweet = tweetApiResponse[0] as z.infer<typeof TweetSchema>
 
   if (tweet.videos.length > 0) {

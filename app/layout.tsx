@@ -14,6 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script defer data-domain="tweeto.lol" src="https://plausible.io/js/script.js" />
+      </head>
       <body className="bg-white">{children}</body>
     </html>
   );
