@@ -31,3 +31,6 @@ export type ProgressResponse =
     });
 
     export type FetchTweetResponse = z.infer<typeof TweetSchema>
+
+    export const RecentlyGrabbedRequest = z.object({})
+    export type RecentlyGrabbedResponse = z.infer<typeof TweetSchema>[]

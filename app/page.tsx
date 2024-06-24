@@ -84,8 +84,8 @@ const Home: NextPage = () => {
         )}
       </div>
       {tweet === null && (
-        <div className="flex w-full mx-auto max-w-screen-lg mt-4">
-          <img src="/demo.gif" className="w-full" style={{ objectFit: "cover" }}></img>
+        <div className="flex flex-col w-full mx-auto max-w-screen-lg mt-6">
+          <img src="/demo.gif" className="w-full mb-4" style={{ objectFit: "cover" }}></img>
         </div>
       )}
     </div>
