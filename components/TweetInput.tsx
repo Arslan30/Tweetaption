@@ -32,7 +32,7 @@ export const TweetInput: React.FC<{
         const tweetId = BigInt(tweetIdString).toString()
         setTweetLoading(true);
         try {
-          const tweet = await fetchTweet({tweetId})
+          const tweet = await fetchTweet({ tweetId })
           setTweet(tweet);
           setError(null);
           console.log(router.push("/?url=" + tweetUrlInput))
@@ -70,6 +70,18 @@ export const TweetInput: React.FC<{
                 setText={setTweetUrlInput}
                 text={tweetUrlInput}
               ></Input>
+              {tweetUrlInput === "" && (
+                <Button
+                  className="mr-2 bg-rose-400 hover:bg-rose-500 active:bg-rose-600"
+                  loading={tweetLoading}
+                  disabled={tweetLoading}
+                  onClick={() => {
+                    setTweetUrlInput("https://x.com/elonmusk/status/1777422303434867162")
+                  }}
+                >
+                  Try example
+                </Button>
+              )}
               <Button
                 loading={tweetLoading}
                 disabled={tweetLoading}

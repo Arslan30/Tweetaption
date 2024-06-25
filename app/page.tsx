@@ -67,10 +67,10 @@ const Home: NextPage = () => {
   const [tweet, setTweet] = useState<z.infer<typeof TweetSchema> | null>(null);
 
   return (
-    <div className="flex flex-col py-3 mb-5 px-4 w-full gap-6">
+    <div className="flex flex-col py-3 mb-3 px-4 w-full gap-6">
       <div className="flex mb-6 mt-2 mx-auto w-full" style={{ maxWidth: "var(--max-frame-width)" }}>
         <a href="/">
-         <Image src="/logo.png" alt="logo" width={120} height={120} />
+          <Image src="/logo.png" alt="logo" width={120} height={120} />
         </a>
       </div>
       <div style={{ maxWidth: "var(--max-frame-width)" }} className="text-5xl font-geist text-amber-500 font-bold mx-auto">{"Grab any tweet's video, without losing context."}</div>
@@ -84,10 +84,13 @@ const Home: NextPage = () => {
         )}
       </div>
       {tweet === null && (
-        <div className="flex flex-col w-full mx-auto max-w-screen-lg mt-6">
+        <div className="flex flex-col w-full mx-auto max-w-screen-lg mt-2">
           <img src="/demo.gif" className="w-full mb-4" style={{ objectFit: "cover" }}></img>
         </div>
       )}
+      <div className="flex font-mono flex-col w-full mx-auto max-w-screen-lg text-center ">
+        <div className="font-bold text-sm font-geist text-orange-500 font-bold" >Originally created to combat censorship in Pakistan.</div>
+      </div>
     </div>
   );
 };
