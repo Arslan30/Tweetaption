@@ -1,5 +1,3 @@
-import { z } from "zod";
-import { TweetSchema } from "../../types/constants";
 import { ErrorComp } from "../generic/Error";
 import { Input } from "../generic/Input";
 import { useEffect, useState } from "react";
@@ -7,10 +5,11 @@ import { fetchTweet } from "../../lambda/api";
 import clsx from "clsx";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "../generic/Button";
+import { TweetSchemaType } from "../../types/constants";
 
 export const TweetInput: React.FC<{
-  tweet: z.infer<typeof TweetSchema> | null;
-  setTweet: React.Dispatch<React.SetStateAction<z.infer<typeof TweetSchema> | null>>;
+  tweet: TweetSchemaType | null;
+  setTweet: React.Dispatch<React.SetStateAction<TweetSchemaType | null>>;
 }> = ({ tweet, setTweet }) => {
   const props = useSearchParams()
   const router = useRouter()

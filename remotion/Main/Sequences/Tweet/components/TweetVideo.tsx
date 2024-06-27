@@ -1,6 +1,5 @@
 import { Video } from "remotion";
 import { TweetDefinitelyExists } from "../../../../../types/constants";
-import assert from "assert";
 
 const VIDEO_STYLES = { borderRadius: "3%", overflow: "hidden", height: "auto", width: "100%", minHeight: 10 }
 

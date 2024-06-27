@@ -6,9 +6,9 @@ import React, { useMemo, useRef, useState } from "react";
 import { Main } from "../remotion/Main/Main";
 import {
   CompositionProps,
-  TweetSchema,
   VIDEO_FPS,
   TweetDefinitelyExists,
+  TweetSchemaType,
 } from "../types/constants";
 import { z } from "zod";
 import { TweetInput } from "../components/homepage/TweetInput";
@@ -16,7 +16,6 @@ import Image from 'next/image'
 import { CALCULATE_METADATA } from "../remotion/Main/COMP_METADATA";
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
 import { RenderControls } from "../components/homepage/RenderControls";
-import EditSettings from "../components/homepage/EditSettings";
 
 
 const RenderPlayer = ({ tweet }: TweetDefinitelyExists) => {
@@ -66,7 +65,7 @@ const RenderPlayer = ({ tweet }: TweetDefinitelyExists) => {
 
 
 const Home: NextPage = () => {
-  const [tweet, setTweet] = useState<z.infer<typeof TweetSchema> | null>(null);
+  const [tweet, setTweet] = useState<TweetSchemaType | null>(null);
 
   return (
     <div className="flex flex-col py-3 mb-3 px-4 w-full gap-6">

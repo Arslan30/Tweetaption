@@ -6,7 +6,6 @@ import { z } from "zod";
 import { getVideoMetadata } from "@remotion/media-utils";
 import { createRoot } from 'react-dom/client';
 import PureTweet from "./Sequences/Tweet/PureVideoTweet";
-import assert from "assert";
 
 const oneTimeRender = (jsx: React.ReactNode) => {
   const body = document.querySelector("body")
