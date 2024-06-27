@@ -30,9 +30,8 @@ export const TweetMediaIsVideo = z.object({
 
 export const TweetMediaIsPhoto = z.object({
   type: z.literal('photo'),
-  poster: z.string().url(),
+  url: z.string().url(),
   size: mediaSizeSchema,
-  video: videoSchema,
 })
 
 export const TweetMediaIsAnimatedGif = z.object({

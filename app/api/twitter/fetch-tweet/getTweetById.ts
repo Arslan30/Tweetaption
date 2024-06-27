@@ -65,20 +65,22 @@ const tweetBuilder = (syndicationTweet: Tweet | TweetParent | QuotedTweet) => {
           video: {
             bitrate: best_variant.bitrate ?? null,
             url: best_variant.url,
-            duration_millis: (media.video_info as any).duration_millis,  
+            duration_millis: (media.video_info as any).duration_millis,
           }
         }
 
         return generator
       } else if (media.type === "photo") {
-        return {
+        const generator: z.infer<typeof TweetMediaSchema> = {
           type: "photo",
           url: media.media_url_https,
           size: {
             height: media.sizes.large.h,
             width: media.sizes.large.w,
           }
+
         }
+        return generator
       } else {
         return {
           type: "animated_gif",
@@ -87,7 +89,7 @@ const tweetBuilder = (syndicationTweet: Tweet | TweetParent | QuotedTweet) => {
             height: media.sizes.large.h,
             width: media.sizes.large.w,
           }
-        
+
         }
       }
     }) : undefined,
