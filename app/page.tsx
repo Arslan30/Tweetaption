@@ -11,11 +11,12 @@ import {
   TweetDefinitelyExists,
 } from "../types/constants";
 import { z } from "zod";
-import { TweetInput } from "../components/TweetInput";
+import { TweetInput } from "../components/homepage/TweetInput";
 import Image from 'next/image'
 import { CALCULATE_METADATA } from "../remotion/Main/COMP_METADATA";
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
-import { RenderControls } from "../components/RenderControls";
+import { RenderControls } from "../components/homepage/RenderControls";
+import EditSettings from "../components/homepage/EditSettings";
 
 
 const RenderPlayer = ({ tweet }: TweetDefinitelyExists) => {
@@ -57,6 +58,7 @@ const RenderPlayer = ({ tweet }: TweetDefinitelyExists) => {
           autoPlay
         />
       </div>
+      {/* <EditSettings tweet={tweet} /> */}
       <RenderControls tweet={tweet} />
     </div>
   )

@@ -1,24 +1,8 @@
 import { z } from "zod";
+import { TweetSchema } from "./TweetSchema";
 export const COMP_NAME = "Main";
 
-export const TweetSchema = z.object({
-  id: z.string(),
-  nameHtml: z.string(),
-  handler: z.string(),
-  avatarUrl: z.string().url(),
-  textHtml: z.string(),
-  verified: z.boolean(),
-  url: z.string().url(),
-  videos: z.array(z.object({
-    poster: z.string().url(),
-    download_url: z.string().url(),
-  })),
-  likes: z.number(),
-  quotes: z.number(),
-  retweets: z.number(),
-  replies: z.number(),
-  datetime: z.string(), // You might want to use z.date() if you plan to convert strings to Date objects
-});
+export type TweetSchemaType = z.infer<typeof TweetSchema>;
 
 export type TweetDefinitelyExists = {
   tweet: z.infer<typeof TweetSchema>
@@ -31,25 +15,53 @@ export const CompositionProps = z.object({
 
 export const defaultMainProps: z.infer<typeof CompositionProps> = {
   tweet: {
-    "id": "1800884147705315751",
-    "nameHtml": "Imran Khan",
-    "handler": "@ImranKhanPTI",
-    "avatarUrl": "https://pbs.twimg.com/profile_images/1548735070030204929/SE6zZzFV.jpg",
-    "textHtml": "عمران خان صاحب نے علامہ اقبال کا یہ پیغام دوبارہ قوم تک پہنچانے کا کہا ہے:\n“ہے جرم ضعیفی کی سزا مرگ مفاجات” <a href=\"https://twitter.com/ImranKhanPTI/status/1800884147705315751/video/1\">pic.twitter.com/ullT4N77Nf</a>",
-    "verified": true,
-    "url": "https://twitter.com/ImranKhanPTI/status/1800884147705315751",
-    "videos": [
-        {
-            "poster": "https://pbs.twimg.com/amplify_video_thumb/1800884084370993152/img/EnpLom96qv8Ef1Za.jpg",
-            "download_url": "https://video.twimg.com/amplify_video/1800884084370993152/vid/avc1/1080x1080/kS1Ce-q3QJFf0PA1.mp4?tag=16"
+    id: '1800884147705315751',
+    user: {
+      id_str: '122453931',
+      name: 'Imran Khan',
+      profile_image_url_https: 'https://pbs.twimg.com/profile_images/1548735070030204929/SE6zZzFV_normal.jpg',
+      screen_name: 'ImranKhanPTI',
+      verified: false,
+      is_blue_verified: true,
+      profile_image_shape: 'Circle'
+    },
+    url: 'https://twitter.com/ImranKhanPTI/status/1800884147705315751',
+    textHtml: 'عمران خان صاحب نے علامہ اقبال کا یہ پیغام دوبارہ قوم تک پہنچانے کا کہا ہے:\n' +
+      '“ہے جرم ضعیفی کی سزا مرگ مفاجات” https://t.co/ullT4N77Nf',
+    created_at: '2024-06-12T13:33:34.000Z',
+    media: [
+      {
+        type: 'video',
+        poster: 'https://pbs.twimg.com/ext_tw_video_thumb/1801669623437303808/pu/img/hTyfL8s59g-IOokF.jpg',
+        size: { height: 360, width: 638 },
+        video: {
+          bitrate: 832000,
+          url: 'https://video.twimg.com/ext_tw_video/1801669623437303808/pu/vid/avc1/638x360/ULquA_AccQ0SPoC7.mp4?tag=12',
+          duration_millis: 19904
         }
+      },
+      {
+        type: 'video',
+        poster: 'https://pbs.twimg.com/ext_tw_video_thumb/1801669633981734912/pu/img/qbwsdKcL4z42kxJq.jpg',
+        size: { height: 360, width: 638 },
+        video: {
+          bitrate: 832000,
+          url: 'https://video.twimg.com/ext_tw_video/1801669633981734912/pu/vid/avc1/638x360/1vZIcSwo2cTpAueo.mp4?tag=12',
+          duration_millis: 14442
+        }
+      },
+      {
+        type: 'video',
+        poster: 'https://pbs.twimg.com/ext_tw_video_thumb/1801669660775010304/pu/img/-aNdDBe2iYAEZam2.jpg',
+        size: { height: 228, width: 636 },
+        video: {
+          bitrate: 256000,
+          url: 'https://video.twimg.com/ext_tw_video/1801669660775010304/pu/vid/avc1/636x228/tvakl3PIlYwvIJxN.mp4?tag=12',
+          duration_millis: 3041
+        }
+      }
     ],
-    "likes": 42145,
-    "quotes": 0,
-    "retweets": 21092,
-    "replies": 0,
-    "datetime": "2024-06-12T13:33:34.000Z",
-}
+  }
 };
 
 export const DEFAULT_DURATION_IN_FRAMES = 150;

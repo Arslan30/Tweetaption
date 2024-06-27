@@ -2,7 +2,7 @@ import React from "react";
 import { TweetDefinitelyExists } from "../../../../../types/constants"
 
 const TimeDisplay = ({tweet}: TweetDefinitelyExists) => {
-  const date = new Date(tweet.datetime);
+  const date = new Date(tweet.created_at);
 
   const formattedTime = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }).format(date);
   const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: "short", day: 'numeric' }).format(date);

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TweetSchema } from "./constants";
+import { TweetSchema } from "./TweetSchema";
 
 export const RenderRequest = z.object({
   id: z.string(),

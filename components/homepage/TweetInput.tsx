@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { TweetSchema } from "../types/constants";
-import { Button } from "./Button";
-import { ErrorComp } from "./Error";
-import { Input } from "./Input";
+import { TweetSchema } from "../../types/constants";
+import { ErrorComp } from "../generic/Error";
+import { Input } from "../generic/Input";
 import { useEffect, useState } from "react";
-import { fetchTweet } from "../lambda/api";
+import { fetchTweet } from "../../lambda/api";
 import clsx from "clsx";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Button } from "../generic/Button";
 
 export const TweetInput: React.FC<{
   tweet: z.infer<typeof TweetSchema> | null;

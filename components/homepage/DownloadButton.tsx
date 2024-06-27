@@ -1,6 +1,6 @@
 import React from "react";
-import { State } from "../helpers/use-rendering";
-import { Button } from "./Button";
+import { State } from "../../helpers/use-rendering";
+import { Button } from "../generic/Button";
 import { FaDownload } from "react-icons/fa";
 
 const Megabytes: React.FC<{

@@ -23,6 +23,13 @@ export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
     });
 
     if (renderProgress.fatalErrorEncountered) {
+      if (renderProgress.errors.length === 0) {
+        return {
+          type: "error",
+          message: "An unknown fatal error occurred.",
+        };
+      }
+      
       return {
         type: "error",
         message: renderProgress.errors[0].message,

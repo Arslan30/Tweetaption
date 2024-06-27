@@ -8,3 +8,7 @@
   color: #1b95e0;
   direction: auto;
 }
+
+.TweetText :global(.media), .TweetText :global(.url) {
+  display: none;
+}

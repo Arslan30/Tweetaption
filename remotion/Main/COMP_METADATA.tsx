@@ -6,6 +6,7 @@ import { z } from "zod";
 import { getVideoMetadata } from "@remotion/media-utils";
 import { createRoot } from 'react-dom/client';
 import PureTweet from "./Sequences/Tweet/PureVideoTweet";
+import assert from "assert";
 
 const oneTimeRender = (jsx: React.ReactNode) => {
   const body = document.querySelector("body")
@@ -38,7 +39,11 @@ const makeEven = (num: number) => {
 export const CALCULATE_METADATA = async ({ tweet }: TweetDefinitelyExists) => {
   console.log("calculating metadata...")
 
-  const data = await getVideoMetadata(tweet.videos[0].download_url);
+  if (tweet.media![0].type !== "video") {
+    throw new Error("Tweet's first media must be a video.")
+  }
+
+  const data = await getVideoMetadata(tweet.media![0].video.url);
 
   const OUTRO_LENGTH = 1 * VIDEO_FPS;
   const VIDEO_LENGTH = Math.ceil(data.durationInSeconds) * VIDEO_FPS;

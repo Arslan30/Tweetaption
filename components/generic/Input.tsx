@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 
 export const Input: React.FC<{
   text: string;
@@ -18,7 +18,7 @@ export const Input: React.FC<{
 
   return (
     <input
-      className={cn("rounded-sm tracking-wider px-2 flex w-full bg-transparent text-base", "focus:border-focused-border-color outline-none", className)}
+      className={cn("!border-0 py-0 !outline-none !ring-0 rounded-sm tracking-wider px-2 flex w-full bg-transparent text-base", "focus:border-focused-border-color outline-none", className)}
       disabled={disabled}
       placeholder={placeholder}
       name={name}

@@ -1,50 +1,98 @@
-import { MediaVideo, getTweet } from "react-tweet/api"
-import { TweetSchema } from "../../../../types/constants";
+import { QuotedTweet, Tweet, TweetParent, getTweet } from "react-tweet/api"
 import { z } from "zod";
-import parse from "node-html-parser";
+import { TweetSchema, TweetMediaSchema } from "../../../../types/TweetSchema";
 
 export const getTweetById = async (tweetId: string) => {
-  const tweetApiResponse = await fetch(`https://tweethunter.io/api/thread?tweetId=${tweetId}`, {
-    method: 'GET',
-    headers: {
-      'referer': 'https://tweethunter.io/tweetpik',
-      'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'
-    }
-  })
-    .then(response => response.json())
-    .catch(error => {
-      console.error(error)
-      throw error
-    })
+  const syndicationTweet = await getTweet(tweetId)
 
-  if (tweetApiResponse.error || tweetApiResponse.length === 0) {
+  if (!syndicationTweet) {
     throw new Error("Couldn't find tweet, maybe it got deleted?")
   }
 
-  const tweet = tweetApiResponse[0] as z.infer<typeof TweetSchema>
+  const tweet = tweetBuilder(syndicationTweet)
 
-  if (tweet.videos.length > 0) {
-    await getTweet(tweet.id)
-      .then(tweetX => {
-        tweetX?.mediaDetails?.filter(media => media.type === "video").forEach((video, i) => {
-          const variants = (video as MediaVideo).video_info.variants.filter(variant => variant.content_type === "video/mp4")
-          const best_bitrate = Math.max(...variants.map(variant => variant.bitrate ?? 0))
+  return tweet
+}
 
-          tweet.videos[i].download_url = variants.find(variant => variant.bitrate === best_bitrate)!.url
-        })
-      })
+const tweetBuilder = (syndicationTweet: Tweet | TweetParent | QuotedTweet) => {
+  let textHtml = syndicationTweet.text
 
-      const doc = parse(tweet.textHtml)
-      doc.querySelectorAll('a').forEach(a => {
-        if (a.getAttribute('href')!.match(/https:\/\/((twitter)|x).com\/[A-Za-z0-9_]+\/status\/[\d]+\/video\/\d/g)) {
-          a.remove()
-        } else {
-          a.setAttribute('dir', 'auto')
+  syndicationTweet.entities.hashtags.forEach(hashtag => {
+    textHtml = textHtml.replace(`#${hashtag.text}`, `<a class="hashtag" href="https://twitter.com/hashtag/${hashtag.text}">#${hashtag.text}</a>`)
+  })
+
+  syndicationTweet.entities.symbols.forEach(symbol => {
+    textHtml = textHtml.replace(`$${symbol.text}`, `<a class="symbol" href="https://twitter.com/search?q=%24${symbol.text}">$${symbol.text}</a>`)
+  })
+
+  syndicationTweet.entities.urls.forEach(url => {
+    textHtml = textHtml.replace(url.url, `<a class="url" href="${url.expanded_url}">${url.display_url}</a>`)
+  })
+
+  syndicationTweet.entities.user_mentions.forEach(userMention => {
+    textHtml = textHtml.replace(`@${userMention.screen_name}`, `<a class="user-mention" href="https://twitter.com/${userMention.screen_name}">@${userMention.screen_name}</a>`)
+  })
+
+  syndicationTweet.entities.media?.forEach(media => {
+    textHtml = textHtml.replace(media.url, `<a class="media" href="${media.expanded_url}">${media.display_url}</a>`)
+  })
+
+  const tweet: z.infer<typeof TweetSchema> = {
+    id: syndicationTweet.id_str,
+    user: syndicationTweet.user,
+    url: `https://twitter.com/${syndicationTweet.user.screen_name}/status/${syndicationTweet.id_str}`,
+    textHtml,
+    created_at: syndicationTweet.created_at,
+    media: "mediaDetails" in syndicationTweet ? syndicationTweet.mediaDetails?.map(media => {
+      if (media.type === "video") {
+        const variants = media.video_info.variants.filter(variant => variant.content_type === "video/mp4")
+        const best_bitrate = Math.max(...variants.map(variant => variant.bitrate ?? 0))
+        const best_variant = variants.find(variant => variant.bitrate === best_bitrate)
+
+        if (!best_variant) {
+          throw new Error(
+            "Couldn't find best variant for video."
+          )
         }
-      })
-      tweet.textHtml = doc.innerHTML.trim()
-  } else {
-    throw new Error("Couldn't find video in tweet.")
+
+        const generator: z.infer<typeof TweetMediaSchema> = {
+          type: "video",
+          poster: media.media_url_https,
+          size: {
+            height: media.sizes.large.h,
+            width: media.sizes.large.w,
+          },
+          video: {
+            bitrate: best_variant.bitrate ?? null,
+            url: best_variant.url,
+            duration_millis: (media.video_info as any).duration_millis,  
+          }
+        }
+
+        return generator
+      } else if (media.type === "photo") {
+        return {
+          type: "photo",
+          url: media.media_url_https,
+          size: {
+            height: media.sizes.large.h,
+            width: media.sizes.large.w,
+          }
+        }
+      } else {
+        return {
+          type: "animated_gif",
+          url: media.media_url_https,
+          size: {
+            height: media.sizes.large.h,
+            width: media.sizes.large.w,
+          }
+        
+        }
+      }
+    }) : undefined,
+    parent: ("parent" in syndicationTweet && syndicationTweet.parent) ? tweetBuilder(syndicationTweet.parent) : undefined,
+    quoted_tweet: ("quoted_tweet" in syndicationTweet && syndicationTweet.quoted_tweet) ? tweetBuilder(syndicationTweet.quoted_tweet) : undefined,
   }
 
   return tweet

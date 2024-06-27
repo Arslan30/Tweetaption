@@ -1,9 +1,9 @@
-import { useRendering } from "../helpers/use-rendering";
-import { COMP_NAME, TweetDefinitelyExists } from "../types/constants";
+import { useRendering } from "../../helpers/use-rendering";
+import { COMP_NAME, TweetDefinitelyExists } from "../../types/constants";
 import { DownloadButton } from "./DownloadButton";
-import { ErrorComp } from "./Error";
-import { ProgressBar } from "./ProgressBar";
-import { Button } from "./Button";
+import { ErrorComp } from "../generic/Error";
+import { ProgressBar } from "../generic/ProgressBar";
+import { Button } from "../generic/Button";
 import { FaLink } from "react-icons/fa";
 import QRCode from "react-qr-code";
 
