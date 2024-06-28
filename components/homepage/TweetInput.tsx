@@ -75,7 +75,7 @@ export const TweetInput: React.FC<{
                   loading={tweetLoading}
                   disabled={tweetLoading}
                   onClick={() => {
-                    setTweetUrlInput("https://x.com/elonmusk/status/1777422303434867162")
+                    setTweetUrlInput("https://x.com/i/status/1806500027835240489")
                   }}
                 >
                   Try example
