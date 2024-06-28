@@ -89,8 +89,23 @@ const Home: NextPage = () => {
           <img src="/demo.gif" className="w-full mb-4" style={{ objectFit: "cover" }}></img>
         </div>
       )}
-      <div className="flex font-mono flex-col w-full mx-auto max-w-screen-lg text-center ">
-        <div className="font-bold text-sm font-geist text-orange-500 font-bold" >Originally created to combat censorship in Pakistan.</div>
+      <div className="flex flex-col relative md:flex-row items-center font-mono gap-6 w-full mx-auto max-w-screen-lg text-center ">
+        <div className="font-bold md:mx-auto text-sm font-geist text-orange-500 font-bold" >Originally created to combat censorship in Pakistan.</div>
+        <a
+          href="https://www.producthunt.com/posts/tweeto-lol?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tweeto&#0045;lol"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="md:absolute md:right-0"
+        >
+          <img
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=466740&theme=light"
+            alt="tweeto&#0046;lol - Grab&#0032;any&#0032;tweet&#0039;s&#0032;video&#0044;&#0032;without&#0032;losing&#0032;context&#0046; | Product Hunt"
+            style={{ width: 'auto', height: '2em' }}
+            width="250"
+            height="54"
+          />
+        </a>
+
       </div>
     </div>
   );
