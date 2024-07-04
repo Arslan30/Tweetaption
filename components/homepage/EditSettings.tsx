@@ -1,18 +1,14 @@
-import { TweetDefinitelyExists } from "../../types/constants";
+import { RenderSettingsSchemaType, TweetSchemaType } from "../../types/constants";
 import Checkbox from "../generic/Checkbox";
-
-export type SettingsProp = {
-  includeParent: boolean,
-  includeQuoted: boolean,
-}
 
 export const EditSettings = ({
   tweet,
   settings,
   setSettings
-}: TweetDefinitelyExists & {
-  settings: SettingsProp
-  setSettings: (settings: SettingsProp) => void
+}: {
+  tweet: TweetSchemaType
+  settings: RenderSettingsSchemaType
+  setSettings: (settings: RenderSettingsSchemaType) => void
 }) => {
   return (
     <div className="flex flex-col">

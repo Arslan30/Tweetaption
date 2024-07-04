@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TweetSchema } from "./TweetSchema";
+import { TweetSchemaType } from "./constants";
 
 export const RenderRequest = z.object({
   id: z.string(),
@@ -30,7 +30,7 @@ export type ProgressResponse =
       tweetId: z.string(),
     });
 
-    export type FetchTweetResponse = z.infer<typeof TweetSchema>
+    export type FetchTweetResponse = TweetSchemaType
 
     export const RecentlyGrabbedRequest = z.object({})
-    export type RecentlyGrabbedResponse = z.infer<typeof TweetSchema>[]
+    export type RecentlyGrabbedResponse = TweetSchemaType[]

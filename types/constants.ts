@@ -4,18 +4,26 @@ export const COMP_NAME = "Main";
 
 export type TweetSchemaType = z.infer<typeof TweetSchema>;
 
+const RenderSettingsSchema = z.object({
+  includeParent: z.boolean(),
+  includeQuoted: z.boolean(),
+  mediaIndex: z.number()
+})
+
+export type RenderSettingsSchemaType = z.infer<typeof RenderSettingsSchema>;
+
 export type TweetDefinitelyExists = {
-  tweet: z.infer<typeof TweetSchema>
-  mediaIndex?: number
+  tweet: TweetSchemaType
+  renderSettings: RenderSettingsSchemaType
 }
 
 
 export const CompositionProps = z.object({
   tweet: TweetSchema.nullable(),
-  mediaIndex: z.number().optional()
+  renderSettings: RenderSettingsSchema.nullable()
 });
 
-export const defaultMainProps: z.infer<typeof CompositionProps> = {
+export const defaultMainProps: TweetDefinitelyExists = {
   tweet: {
     id: '1800884147705315751',
     user: {
@@ -63,6 +71,11 @@ export const defaultMainProps: z.infer<typeof CompositionProps> = {
         }
       }
     ],
+  },
+  renderSettings: {
+    includeParent: false,
+    includeQuoted: false,
+    mediaIndex: 0
   }
 };
 

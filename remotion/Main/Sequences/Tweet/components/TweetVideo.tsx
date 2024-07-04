@@ -19,7 +19,7 @@ export const PureTweetVideo = ({ tweet, mediaIndex = 0 }: TweetDefinitelyExists)
   )
 }
 
-const TweetVideo = ({ tweet, mediaIndex = 0 }: TweetDefinitelyExists) => {
+export const TweetVideo = ({ tweet, mediaIndex = 0 }: TweetDefinitelyExists) => {
   const media = tweet.media![mediaIndex]
   if (media.type !== "video") {
     throw new Error("Tweet's first media must be a video.")
@@ -34,5 +34,3 @@ const TweetVideo = ({ tweet, mediaIndex = 0 }: TweetDefinitelyExists) => {
     </div>
   )
 }
-
-export default TweetVideo;

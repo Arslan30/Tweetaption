@@ -9,18 +9,17 @@ import {
   VIDEO_FPS,
   TweetDefinitelyExists,
   TweetSchemaType,
+  RenderSettingsSchemaType,
 } from "../types/constants";
 import { z } from "zod";
 import { TweetInput } from "../components/homepage/TweetInput";
 import Image from 'next/image'
-import { CALCULATE_METADATA } from "../remotion/Main/COMP_METADATA";
+import { CALCULATE_RENDER_DIMENSIONS } from "../remotion/Main/CALCULATE_RENDER_DIMENSIONS";
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
 import { RenderControls } from "../components/homepage/RenderControls";
-import { EditSettings, SettingsProp } from "../components/homepage/EditSettings";
-import TextTweet from "../remotion/Main/Sequences/Tweet/TextTweet";
-import PhotoTweet from "../remotion/Main/Sequences/Tweet/PhotoTweet";
+import { EditSettings } from "../components/homepage/EditSettings";
 
-const RenderPlayer = ({ tweet, mediaIndex }: TweetDefinitelyExists) => {
+const RenderPlayer = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
   const player = useRef<PlayerRef>(null)
 
   const inputProps: z.infer<typeof CompositionProps> = useMemo(() => {
@@ -28,16 +27,16 @@ const RenderPlayer = ({ tweet, mediaIndex }: TweetDefinitelyExists) => {
 
     return {
       tweet,
-      mediaIndex,
+      renderSettings
     };
-  }, [tweet.id, mediaIndex]);
+  }, [tweet.id, JSON.stringify(renderSettings)]);
 
   const { value: metadata, loading: metadataLoading } = useAsyncRefresh(async () => {
-    return await CALCULATE_METADATA({ tweet });
+    return await CALCULATE_RENDER_DIMENSIONS({ tweet, renderSettings });
   }, [tweet.id]);
 
   if (!metadata || metadataLoading) {
-    return <div className="flex mb-8 mt-8 items-center animate-pulse justify-center w-full bg-gray-200 overflow-hidden rounded-lg" style={{ height: 600, width: "100%" }}></div>
+    return <div className="flex items-center animate-pulse justify-center w-full bg-gray-200 overflow-hidden rounded-lg" style={{ height: 600, width: "100%" }}></div>
   }
 
   return (
@@ -61,31 +60,22 @@ const RenderPlayer = ({ tweet, mediaIndex }: TweetDefinitelyExists) => {
 }
 
 
-const RenderTweet = ({ tweet }: TweetDefinitelyExists) => {
-  const [selectedMediaIndex, setSelectedMediaIndex] = useState(0)
-
-  const [settings, setSettings] = useState<SettingsProp>({
+const RenderTweet = ({ tweet }: {
+  tweet: TweetSchemaType
+}) => {
+  const [renderSettings, setRenderSettings] = useState<RenderSettingsSchemaType>({
     includeParent: false,
     includeQuoted: false,
+    mediaIndex: 0
   })
 
   return (
     <div className="flex flex-col">
       <div className="overflow-hidden rounded-lg border mb-8 mt-8">
-        {!tweet.media ? (
-          <TextTweet tweet={tweet} />
-        ) : (
-          tweet.media[selectedMediaIndex].type === "video" ? (
-            <>
-              <RenderPlayer tweet={tweet} mediaIndex={selectedMediaIndex} />
-              <EditSettings tweet={tweet} settings={settings} setSettings={setSettings} />
-              <RenderControls tweet={tweet} />
-            </>
-          ) : (
-            <PhotoTweet tweet={tweet} mediaIndex={selectedMediaIndex} />
-          )
-        )}
+        <RenderPlayer tweet={tweet} renderSettings={renderSettings} />
       </div>
+      <EditSettings tweet={tweet} settings={renderSettings} setSettings={setRenderSettings} />
+      <RenderControls tweet={tweet} renderSettings={renderSettings} />
     </div>
   )
 }
@@ -101,7 +91,7 @@ const Home: NextPage = () => {
           <Image src="/logo.png" alt="logo" width={120} height={120} />
         </a>
       </div>
-      <div style={{ maxWidth: "var(--max-frame-width)" }} className="text-5xl font-geist text-amber-500 font-bold mx-auto">{"Grab any tweet's video, without losing context."}</div>
+      <div style={{ maxWidth: "var(--max-frame-width)" }} className="text-5xl font-geist text-amber-500 font-bold mx-auto">{"Grab any tweet as a video, without losing context."}</div>
       <div className="flex flex-col w-full mx-auto" style={{ maxWidth: "var(--max-frame-width)" }}>
         <TweetInput
           tweet={tweet}

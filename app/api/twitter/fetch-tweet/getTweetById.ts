@@ -1,6 +1,7 @@
 import { QuotedTweet, Tweet, TweetParent, getTweet } from "react-tweet/api"
 import { z } from "zod";
-import { TweetSchema, TweetMediaSchema } from "../../../../types/TweetSchema";
+import { TweetMediaSchema } from "../../../../types/TweetSchema";
+import { TweetSchemaType } from "../../../../types/constants";
 
 export const getTweetById = async (tweetId: string) => {
   const syndicationTweet = await getTweet(tweetId)
@@ -14,7 +15,9 @@ export const getTweetById = async (tweetId: string) => {
   return tweet
 }
 
-const tweetBuilder = (syndicationTweet: Tweet | TweetParent | QuotedTweet) => {
+const tweetBuilder = (syndicationTweet: (Tweet | TweetParent | QuotedTweet) & {
+  card?: any
+}) => {
   let textHtml = syndicationTweet.text
 
   syndicationTweet.entities.hashtags.forEach(hashtag => {
@@ -37,13 +40,13 @@ const tweetBuilder = (syndicationTweet: Tweet | TweetParent | QuotedTweet) => {
     textHtml = textHtml.replace(media.url, `<a class="media" href="${media.expanded_url}">${media.display_url}</a>`)
   })
 
-  const tweet: z.infer<typeof TweetSchema> = {
+  const tweet: TweetSchemaType = {
     id: syndicationTweet.id_str,
     user: syndicationTweet.user,
     url: `https://twitter.com/${syndicationTweet.user.screen_name}/status/${syndicationTweet.id_str}`,
     textHtml,
     created_at: syndicationTweet.created_at,
-    media: "mediaDetails" in syndicationTweet ? syndicationTweet.mediaDetails?.map(media => {
+    media: syndicationTweet.mediaDetails?.map(media => {
       if (media.type === "video") {
         const variants = media.video_info.variants.filter(variant => variant.content_type === "video/mp4")
         const best_bitrate = Math.max(...variants.map(variant => variant.bitrate ?? 0))
@@ -92,7 +95,7 @@ const tweetBuilder = (syndicationTweet: Tweet | TweetParent | QuotedTweet) => {
 
         }
       }
-    }) : undefined,
+    }),
     parent: ("parent" in syndicationTweet && syndicationTweet.parent) ? tweetBuilder(syndicationTweet.parent) : undefined,
     quoted_tweet: ("quoted_tweet" in syndicationTweet && syndicationTweet.quoted_tweet) ? tweetBuilder(syndicationTweet.quoted_tweet) : undefined,
   }

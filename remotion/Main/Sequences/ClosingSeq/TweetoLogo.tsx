@@ -20,9 +20,11 @@ export const TweetoLogo: React.FC = () => {
 
   return (
     <div style={{
-      transform: `translate(${shakeX * (Math.random() > 0.5 ? -1 : 1)}px, ${shakeY * (Math.random() > 0.5 ? -1 : 1)}px)`
+      transform: `translate(${shakeX * (Math.random() > 0.5 ? -1 : 1)}px, ${shakeY * (Math.random() > 0.5 ? -1 : 1)}px)`,
+      maxHeight: "100%",
+      padding: "40px 20px",
     }}>
-      <Img src={staticFile("/logo.png")} />
+      <Img src={staticFile("/logo.png")} style={{maxHeight: "100%"}} />
     </div>
   );
 }

@@ -8,7 +8,7 @@ import {
   DEFAULT_VIDEO_HEIGHT,
   DEFAULT_VIDEO_WIDTH,
 } from "../types/constants";
-import { COMP_METADATA } from "./Main/COMP_METADATA";
+import { CALCULATE_COMPONENT_METADATA } from "./Main/CALCULATE_RENDER_DIMENSIONS";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -20,7 +20,7 @@ export const RemotionRoot: React.FC = () => {
         fps={VIDEO_FPS}
         width={DEFAULT_VIDEO_WIDTH}
         height={DEFAULT_VIDEO_HEIGHT}
-        calculateMetadata={COMP_METADATA}
+        calculateMetadata={CALCULATE_COMPONENT_METADATA}
         defaultProps={defaultMainProps}
       />
     </>
