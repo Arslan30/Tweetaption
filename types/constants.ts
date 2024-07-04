@@ -6,11 +6,13 @@ export type TweetSchemaType = z.infer<typeof TweetSchema>;
 
 export type TweetDefinitelyExists = {
   tweet: z.infer<typeof TweetSchema>
+  mediaIndex?: number
 }
 
 
 export const CompositionProps = z.object({
-  tweet: TweetSchema.nullable()
+  tweet: TweetSchema.nullable(),
+  mediaIndex: z.number().optional()
 });
 
 export const defaultMainProps: z.infer<typeof CompositionProps> = {

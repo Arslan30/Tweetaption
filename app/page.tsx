@@ -16,9 +16,11 @@ import Image from 'next/image'
 import { CALCULATE_METADATA } from "../remotion/Main/COMP_METADATA";
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
 import { RenderControls } from "../components/homepage/RenderControls";
+import { EditSettings, SettingsProp } from "../components/homepage/EditSettings";
+import TextTweet from "../remotion/Main/Sequences/Tweet/TextTweet";
+import PhotoTweet from "../remotion/Main/Sequences/Tweet/PhotoTweet";
 
-
-const RenderPlayer = ({ tweet }: TweetDefinitelyExists) => {
+const RenderPlayer = ({ tweet, mediaIndex }: TweetDefinitelyExists) => {
   const player = useRef<PlayerRef>(null)
 
   const inputProps: z.infer<typeof CompositionProps> = useMemo(() => {
@@ -26,8 +28,9 @@ const RenderPlayer = ({ tweet }: TweetDefinitelyExists) => {
 
     return {
       tweet,
+      mediaIndex,
     };
-  }, [tweet.id]);
+  }, [tweet.id, mediaIndex]);
 
   const { value: metadata, loading: metadataLoading } = useAsyncRefresh(async () => {
     return await CALCULATE_METADATA({ tweet });
@@ -38,27 +41,51 @@ const RenderPlayer = ({ tweet }: TweetDefinitelyExists) => {
   }
 
   return (
+    <Player
+      ref={player}
+      component={Main}
+      inputProps={inputProps}
+      durationInFrames={metadata.durationInFrames}
+      fps={VIDEO_FPS}
+      compositionHeight={metadata.height}
+      compositionWidth={metadata.width}
+      style={{
+        // Can't use tailwind class for width since player's default styles take presedence over tailwind's,
+        // but not over inline styles
+        width: "100%",
+      }}
+      controls
+      autoPlay
+    />
+  )
+}
+
+
+const RenderTweet = ({ tweet }: TweetDefinitelyExists) => {
+  const [selectedMediaIndex, setSelectedMediaIndex] = useState(0)
+
+  const [settings, setSettings] = useState<SettingsProp>({
+    includeParent: false,
+    includeQuoted: false,
+  })
+
+  return (
     <div className="flex flex-col">
       <div className="overflow-hidden rounded-lg border mb-8 mt-8">
-        <Player
-          ref={player}
-          component={Main}
-          inputProps={inputProps}
-          durationInFrames={metadata.durationInFrames}
-          fps={VIDEO_FPS}
-          compositionHeight={metadata.height}
-          compositionWidth={metadata.width}
-          style={{
-            // Can't use tailwind class for width since player's default styles take presedence over tailwind's,
-            // but not over inline styles
-            width: "100%",
-          }}
-          controls
-          autoPlay
-        />
+        {!tweet.media ? (
+          <TextTweet tweet={tweet} />
+        ) : (
+          tweet.media[selectedMediaIndex].type === "video" ? (
+            <>
+              <RenderPlayer tweet={tweet} mediaIndex={selectedMediaIndex} />
+              <EditSettings tweet={tweet} settings={settings} setSettings={setSettings} />
+              <RenderControls tweet={tweet} />
+            </>
+          ) : (
+            <PhotoTweet tweet={tweet} mediaIndex={selectedMediaIndex} />
+          )
+        )}
       </div>
-      {/* <EditSettings tweet={tweet} /> */}
-      <RenderControls tweet={tweet} />
     </div>
   )
 }
@@ -81,7 +108,7 @@ const Home: NextPage = () => {
           setTweet={setTweet}
         ></TweetInput>
         {tweet !== null && (
-          <RenderPlayer tweet={tweet} />
+          <RenderTweet tweet={tweet} />
         )}
       </div>
       {tweet === null && (

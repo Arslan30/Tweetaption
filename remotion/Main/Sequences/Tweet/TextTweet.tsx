@@ -5,7 +5,7 @@ import TweetText from "./components/TweetText"
 
 const TextTweet = ({ tweet }: TweetDefinitelyExists) => {
   return (
-    <div className="flex flex-col h-fit p-9">
+    <div className="flex flex-col h-fit p-6 bg-white w-full">
       <TweetHeader tweet={tweet} />
       <TweetText tweet={tweet} />
       <TweetFooter tweet={tweet} />

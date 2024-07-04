@@ -1,17 +1,47 @@
 import { TweetDefinitelyExists } from "../../types/constants";
 import Checkbox from "../generic/Checkbox";
 
+export type SettingsProp = {
+  includeParent: boolean,
+  includeQuoted: boolean,
+}
+
 export const EditSettings = ({
-  tweet
-}: TweetDefinitelyExists) => {
+  tweet,
+  settings,
+  setSettings
+}: TweetDefinitelyExists & {
+  settings: SettingsProp
+  setSettings: (settings: SettingsProp) => void
+}) => {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col bg-white/50 shadow-sm p-5 rounded-md mb-8 font-geist gap-6">
         <div className="flex flex-col">
           <div className="text-lg font-geist text-rose-400 font-bold mb-4 text-lg">Settings</div>
           <div className="flex flex-col gap-3.5">
-            <Checkbox label="Include Parent tweet." />
-            <Checkbox label="Include Quoted tweet." />
+            <Checkbox
+            label={tweet.quoted_tweet ? "Include the tweet being replied to." : "Include the tweet being replied to. (Unavailable for this tweet)"}
+            disabled={!tweet.parent}
+            isChecked={settings.includeParent}
+            setIsChecked={() => {
+              setSettings({
+                ...settings,
+                includeParent: !settings.includeParent,
+              })
+            }}
+            />
+            <Checkbox
+            label={tweet.quoted_tweet ? "Include Quoted tweet" : "Include Quoted tweet (Unavailable for this tweet)"}
+            disabled={!tweet.quoted_tweet}
+            isChecked={settings.includeQuoted}
+            setIsChecked={() => {
+              setSettings({
+                ...settings,
+                includeQuoted: !settings.includeQuoted,
+              })
+            }}
+            />
           </div>
         </div>
       </div>
@@ -19,4 +49,3 @@ export const EditSettings = ({
   )
 }
 
-export default EditSettings;

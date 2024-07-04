@@ -5,7 +5,7 @@ import { CompositionProps, DEFAULT_DURATION_IN_FRAMES, DEFAULT_VIDEO_HEIGHT, DEF
 import { z } from "zod";
 import { getVideoMetadata } from "@remotion/media-utils";
 import { createRoot } from 'react-dom/client';
-import PureTweet from "./Sequences/Tweet/PureVideoTweet";
+import { PureVideoTweet } from "./Sequences/Tweet/VideoTweet";
 
 const oneTimeRender = (jsx: React.ReactNode) => {
   const body = document.querySelector("body")
@@ -47,7 +47,7 @@ export const CALCULATE_METADATA = async ({ tweet }: TweetDefinitelyExists) => {
   const OUTRO_LENGTH = 1 * VIDEO_FPS;
   const VIDEO_LENGTH = Math.ceil(data.durationInSeconds) * VIDEO_FPS;
 
-  const container = oneTimeRender(<PureTweet tweet={tweet}/>)
+  const container = oneTimeRender(<PureVideoTweet tweet={tweet}/>)
   
   await new Promise((resolve) => {
     const intervalId = setInterval(() => {
