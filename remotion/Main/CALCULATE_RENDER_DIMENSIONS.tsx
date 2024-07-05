@@ -34,8 +34,8 @@ const makeEven = (num: number) => {
   return num % 2 === 0 ? num : num + 1
 }
 
-const DEFAULT_DURATION_IN_SECONDS_FOR_TEXT_TWEET = 3;
-const DEFAULT_DURATION_IN_SECONDS_FOR_PHOTO_TWEET = 3;
+const DEFAULT_DURATION_IN_SECONDS_FOR_TEXT_TWEET = 5;
+const DEFAULT_DURATION_IN_SECONDS_FOR_PHOTO_TWEET = 5;
 
 export const CALCULATE_RENDER_DIMENSIONS = async ({ tweet, renderSettings }: TweetDefinitelyExists) => {
   console.log("calculating dimensions...")
