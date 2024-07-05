@@ -2,12 +2,16 @@ import { z } from 'zod';
 
 const userSchema = z.object({
   id_str: z.string(),
+  is_blue_verified: z.boolean(),
   name: z.string(),
+  profile_image_shape: z.string(),
   profile_image_url_https: z.string().url(),
   screen_name: z.string(),
   verified: z.boolean(),
-  is_blue_verified: z.boolean(),
-  profile_image_shape: z.string(),
+  verified_type: z.union([
+    z.literal("Business"),
+    z.literal("Government"),
+  ]).optional()
 });
 
 const mediaSizeSchema = z.object({

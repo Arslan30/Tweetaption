@@ -33,7 +33,7 @@ export const defaultMainProps: TweetDefinitelyExists = {
       screen_name: 'ImranKhanPTI',
       verified: false,
       is_blue_verified: true,
-      profile_image_shape: 'Circle'
+      profile_image_shape: 'Circle',
     },
     url: 'https://twitter.com/ImranKhanPTI/status/1800884147705315751',
     textHtml: 'عمران خان صاحب نے علامہ اقبال کا یہ پیغام دوبارہ قوم تک پہنچانے کا کہا ہے:\n' +

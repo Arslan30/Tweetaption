@@ -1,4 +1,4 @@
-const VerifiedIcon = () => {
+const BlueVerifiedIcon = () => {
   return (
     <svg viewBox="0 0 22 22" aria-label="Verified account" role="img" style={{ width: '1em', color: 'rgb(27, 149, 224)', fill: 'currentcolor', flexShrink: 0 }}>
       <g>
@@ -11,4 +11,4 @@ const VerifiedIcon = () => {
   )
 }
 
-export default VerifiedIcon
+export default BlueVerifiedIcon
