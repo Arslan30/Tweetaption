@@ -46,10 +46,10 @@ const TimeDisplay = ({tweet}: TweetDefinitelyExists) => {
 //   )
 // }
 
-const TweetFooterUnMemoized = ({tweet}: TweetDefinitelyExists) => {
+const TweetFooterUnMemoized = (props: TweetDefinitelyExists) => {
   return (
     <div className="flex flex-col mt-5 text-tweet-sm font-tweet">
-      <TimeDisplay tweet={tweet} />
+      <TimeDisplay {...props} />
     </div>
   )
 }

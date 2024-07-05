@@ -1,7 +1,6 @@
-import { z } from "zod";
 import { useCallback, useMemo, useState } from "react";
 import { getProgress, renderVideo } from "../lambda/api";
-import { CompositionProps } from "../types/constants";
+import { TweetDefinitelyExists } from "../types/constants";
 
 export type State =
   | {
@@ -37,7 +36,7 @@ const wait = async (milliSeconds: number) => {
 
 export const useRendering = (
   id: string,
-  inputProps: z.infer<typeof CompositionProps>,
+  inputProps: TweetDefinitelyExists
 ) => {
   const [state, setState] = useState<State>({
     status: "init",
@@ -48,7 +47,7 @@ export const useRendering = (
       status: "invoking",
     });
     try {
-      const { renderId, bucketName } = await renderVideo({ id, tweetId: inputProps.tweet!.id });
+      const { renderId, bucketName } = await renderVideo({ id, tweetId: inputProps.tweet!.id, renderSettings: inputProps.renderSettings });
       setState({
         status: "rendering",
         progress: 0,

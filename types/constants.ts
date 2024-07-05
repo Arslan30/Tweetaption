@@ -4,7 +4,7 @@ export const COMP_NAME = "Main";
 
 export type TweetSchemaType = z.infer<typeof TweetSchema>;
 
-const RenderSettingsSchema = z.object({
+export const RenderSettingsSchema = z.object({
   includeParent: z.boolean(),
   includeQuoted: z.boolean(),
   mediaIndex: z.number()

@@ -17,7 +17,6 @@ import Image from 'next/image'
 import { CALCULATE_RENDER_DIMENSIONS } from "../remotion/Main/CALCULATE_RENDER_DIMENSIONS";
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
 import { RenderControls } from "../components/homepage/RenderControls";
-import { EditSettings } from "../components/homepage/EditSettings";
 
 const RenderPlayer = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
   const player = useRef<PlayerRef>(null)
@@ -63,7 +62,7 @@ const RenderPlayer = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
 const RenderTweet = ({ tweet }: {
   tweet: TweetSchemaType
 }) => {
-  const [renderSettings, setRenderSettings] = useState<RenderSettingsSchemaType>({
+  const [renderSettings] = useState<RenderSettingsSchemaType>({
     includeParent: false,
     includeQuoted: false,
     mediaIndex: 0

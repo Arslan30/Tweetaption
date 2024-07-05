@@ -49,7 +49,8 @@ export const POST = executeApi<{
     const tweet = await getTweetById(body.tweetId);
 
     const inputProps: TweetDefinitelyExists = {
-      tweet
+      tweet,
+      renderSettings: body.renderSettings
     }
 
     const result = await renderMediaOnLambda({

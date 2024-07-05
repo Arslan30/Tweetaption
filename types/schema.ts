@@ -1,9 +1,10 @@
 import { z } from "zod";
-import { TweetSchemaType } from "./constants";
+import { RenderSettingsSchema, TweetSchemaType } from "./constants";
 
 export const RenderRequest = z.object({
   id: z.string(),
   tweetId: z.string(),
+  renderSettings: RenderSettingsSchema
 });
 
 export const ProgressRequest = z.object({

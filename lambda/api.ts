@@ -33,10 +33,12 @@ const makeRequest = async <Res>(
 export const renderVideo = async ({
   id,
   tweetId,
+  renderSettings
 }: z.infer<typeof RenderRequest>) => {
   return makeRequest<RenderMediaOnLambdaOutput>("/api/lambda/render", {
     id,
-    tweetId
+    tweetId,
+    renderSettings
   });
 };
 
