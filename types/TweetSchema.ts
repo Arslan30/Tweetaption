@@ -40,10 +40,19 @@ export const TweetMediaIsAnimatedGif = z.object({
   size: mediaSizeSchema,
 })
 
+export const TweetMediaIsCard = z.object({
+  type: z.literal('card'),
+  poster: z.string().url(),
+  size: mediaSizeSchema,
+  title: z.string(),
+  vanity_url: z.string(),
+})
+
 export const TweetMediaSchema = z.discriminatedUnion('type', [
   TweetMediaIsVideo,
   TweetMediaIsPhoto,
   TweetMediaIsAnimatedGif,
+  TweetMediaIsCard,
 ]);
 
 const baseTweetSchema = z.object({
@@ -52,7 +61,7 @@ const baseTweetSchema = z.object({
   url: z.string().url(),
   textHtml: z.string(),
   created_at: z.string(), // Adjust to date type if needed
-  media: z.array(TweetMediaSchema).optional(),
+  media: z.array(TweetMediaSchema),
 });
 
 export const TweetSchema = baseTweetSchema.extend({

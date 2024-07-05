@@ -3,8 +3,8 @@ import { TweetDefinitelyExists } from "../../../../../types/constants";
 
 const VIDEO_STYLES = { borderRadius: "3%", overflow: "hidden", height: "auto", width: "100%", minHeight: 10 }
 
-export const PureTweetVideo = ({ tweet, mediaIndex = 0 }: TweetDefinitelyExists) => {
-  const media = tweet.media![mediaIndex]
+export const PureTweetVideo = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
+  const media = tweet.media[renderSettings.mediaIndex]
   if (media.type !== "video") {
     throw new Error("Tweet's first media must be a video.")
   }
@@ -19,8 +19,8 @@ export const PureTweetVideo = ({ tweet, mediaIndex = 0 }: TweetDefinitelyExists)
   )
 }
 
-export const TweetVideo = ({ tweet, mediaIndex = 0 }: TweetDefinitelyExists) => {
-  const media = tweet.media![mediaIndex]
+export const TweetVideo = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
+  const media = tweet.media[renderSettings.mediaIndex]
   if (media.type !== "video") {
     throw new Error("Tweet's first media must be a video.")
   }

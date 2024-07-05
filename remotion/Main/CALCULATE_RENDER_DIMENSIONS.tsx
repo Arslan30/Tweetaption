@@ -40,7 +40,7 @@ const DEFAULT_DURATION_IN_SECONDS_FOR_PHOTO_TWEET = 3;
 export const CALCULATE_RENDER_DIMENSIONS = async ({ tweet, renderSettings }: TweetDefinitelyExists) => {
   console.log("calculating dimensions...")
 
-  const media = tweet.media?.[renderSettings.mediaIndex]
+  const media = tweet.media[renderSettings.mediaIndex]
   const duration = !media ? DEFAULT_DURATION_IN_SECONDS_FOR_TEXT_TWEET : (
     media.type === "video" ? media.video.duration_millis / 1000 : DEFAULT_DURATION_IN_SECONDS_FOR_PHOTO_TWEET
   )

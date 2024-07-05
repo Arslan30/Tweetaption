@@ -10,7 +10,7 @@ const PHOTO_STYLES = {
 }
 
 export const TweetPhoto = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
-  const media = tweet.media![renderSettings.mediaIndex]
+  const media = tweet.media[renderSettings.mediaIndex]
   if (media.type !== "photo") {
     throw new Error("Tweet's first media must be a photo.")
   }
@@ -29,7 +29,7 @@ export const TweetPhoto = ({ tweet, renderSettings }: TweetDefinitelyExists) => 
 
 
 export const PureTweetPhoto = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
-  const media = tweet.media![renderSettings.mediaIndex]
+  const media = tweet.media[renderSettings.mediaIndex]
   if (media.type !== "photo") {
     throw new Error("Tweet's first media must be a photo.")
   }

@@ -9,7 +9,7 @@ import { PureTweetPhoto, TweetPhoto } from "./components/TweetPhoto";
 const VideoTweetMediaSwitch = (props: TweetDefinitelyExists & {
   isPure: boolean
 }) => {
-  const media = props.tweet.media?.[props.renderSettings.mediaIndex]
+  const media = props.tweet.media[props.renderSettings.mediaIndex]
   if (!media) {
     return null;
   }

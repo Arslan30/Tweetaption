@@ -46,7 +46,7 @@ const tweetBuilder = (syndicationTweet: (Tweet | TweetParent | QuotedTweet) & {
     url: `https://twitter.com/${syndicationTweet.user.screen_name}/status/${syndicationTweet.id_str}`,
     textHtml,
     created_at: syndicationTweet.created_at,
-    media: syndicationTweet.mediaDetails?.map(media => {
+    media: !("mediaDetails" in syndicationTweet && syndicationTweet.mediaDetails) ? [] :syndicationTweet.mediaDetails.map(media => {
       if (media.type === "video") {
         const variants = media.video_info.variants.filter(variant => variant.content_type === "video/mp4")
         const best_bitrate = Math.max(...variants.map(variant => variant.bitrate ?? 0))
@@ -98,6 +98,20 @@ const tweetBuilder = (syndicationTweet: (Tweet | TweetParent | QuotedTweet) & {
     }),
     parent: ("parent" in syndicationTweet && syndicationTweet.parent) ? tweetBuilder(syndicationTweet.parent) : undefined,
     quoted_tweet: ("quoted_tweet" in syndicationTweet && syndicationTweet.quoted_tweet) ? tweetBuilder(syndicationTweet.quoted_tweet) : undefined,
+  }
+
+  if (syndicationTweet.card) {
+    const { binding_values } = syndicationTweet.card
+    tweet.media.unshift({
+      type: "card",
+      poster: binding_values.photo_image_full_size.image_value.url,
+      size: {
+        width: binding_values.photo_image_full_size.image_value.width,
+        height: binding_values.photo_image_full_size.image_value.height,
+      },
+      title: binding_values.title.string_value,
+      vanity_url: binding_values.vanity_url.string_value,
+    })
   }
 
   return tweet
