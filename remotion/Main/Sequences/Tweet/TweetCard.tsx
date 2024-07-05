@@ -27,7 +27,7 @@ export const TweetCard = ({ tweet, renderSettings, isPure }: TweetDefinitelyExis
           style={{ ...PHOTO_STYLES }}
           src={media.poster}
         />
-        <div className="text-white absolute px-1.5 rounded-md left-4 bottom-4" style={{backgroundColor: "rgba(0, 0, 0, 0.77)"}}>{media.title}</div>
+        <div className="text-white absolute px-1.5 rounded-md" style={{backgroundColor: "rgba(0, 0, 0, 0.77)", left: "1rem", bottom: "1rem", width: "calc(100% - 2rem)", whiteSpace: "pre", textOverflow: "ellipsis", overflow: "hidden", wordBreak: "break-word"}}>{media.title}</div>
       </div>
       <div style={{color: "rgb(91, 112, 131)"}} className="font-bold mt-1">From {media.vanity_url}</div>
     </div>
