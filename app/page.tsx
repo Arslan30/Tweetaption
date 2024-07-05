@@ -74,7 +74,7 @@ const RenderTweet = ({ tweet }: {
       <div className="overflow-hidden rounded-lg border mb-8 mt-8">
         <RenderPlayer tweet={tweet} renderSettings={renderSettings} />
       </div>
-      <EditSettings tweet={tweet} settings={renderSettings} setSettings={setRenderSettings} />
+      {/* <EditSettings tweet={tweet} settings={renderSettings} setSettings={setRenderSettings} /> */}
       <RenderControls tweet={tweet} renderSettings={renderSettings} />
     </div>
   )

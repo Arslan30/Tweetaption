@@ -5,6 +5,7 @@ import TweetText from "./components/TweetText";
 import TweetFooter from "./components/TweetFooter";
 import { PureTweetVideo, TweetVideo } from "./components/TweetVideo";
 import { PureTweetPhoto, TweetPhoto } from "./components/TweetPhoto";
+import { TweetCard } from "./TweetCard";
 
 const VideoTweetMediaSwitch = (props: TweetDefinitelyExists & {
   isPure: boolean
@@ -20,6 +21,8 @@ const VideoTweetMediaSwitch = (props: TweetDefinitelyExists & {
     } else {
       return <TweetVideo {...props} />
     }
+  } else if (media.type === "card") {
+    return <TweetCard {...props} isPure={props.isPure} />
   } else {
     if (props.isPure) {
       return <PureTweetPhoto {...props} />
