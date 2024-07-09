@@ -34,17 +34,19 @@ export const POST = executeApi<{
     }
 
 
-    const { data: renders } = await supabase
-      .from('renders')
-      .select("*")
-      .eq('tweet_id', body.tweetId)
+    // RETRIEVE FROM CACHE
 
-    if (renders && renders.length > 0) {
-      return {
-        bucketName: renders[0].bucket_name,
-        renderId: renders[0].render_id,
-      }
-    }
+    // const { data: renders } = await supabase
+    //   .from('renders')
+    //   .select("*")
+    //   .eq('tweet_id', body.tweetId)
+
+    // if (renders && renders.length > 0) {
+    //   return {
+    //     bucketName: renders[0].bucket_name,
+    //     renderId: renders[0].render_id,
+    //   }
+    // }
 
     const tweet = await getTweetById(body.tweetId);
 

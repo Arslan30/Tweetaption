@@ -1,7 +1,7 @@
 "use client";
 
 import { CalculateMetadataFunction } from "remotion";
-import { CompositionProps, DEFAULT_DURATION_IN_FRAMES, DEFAULT_VIDEO_HEIGHT, DEFAULT_VIDEO_WIDTH, TweetDefinitelyExists, VIDEO_FPS, defaultMainProps } from "../../types/constants";
+import { CompositionProps, DEFAULT_DURATION_IN_FRAMES, DEFAULT_VIDEO_HEIGHT, DEFAULT_VIDEO_WIDTH, OUTRO_DURATION_IN_FRAMES, TweetDefinitelyExists, VIDEO_FPS, defaultMainProps } from "../../types/constants";
 import { z } from "zod";
 import { createRoot } from 'react-dom/client';
 import { PureVideoTweet } from "./Sequences/Tweet/VideoTweet";
@@ -45,8 +45,7 @@ export const CALCULATE_RENDER_DIMENSIONS = async ({ tweet, renderSettings }: Twe
     media.type === "video" ? media.video.duration_millis / 1000 : DEFAULT_DURATION_IN_SECONDS_FOR_PHOTO_TWEET
   )
 
-  const OUTRO_LENGTH = 1 * VIDEO_FPS;
-  const VIDEO_LENGTH = Math.ceil(duration) * VIDEO_FPS;
+  const VIDEO_LENGTH = Math.floor(duration) * VIDEO_FPS;
 
   const container = oneTimeRender(<PureVideoTweet tweet={tweet} renderSettings={renderSettings} />)
   
@@ -87,7 +86,7 @@ export const CALCULATE_RENDER_DIMENSIONS = async ({ tweet, renderSettings }: Twe
   container.remove()
 
   return {
-    durationInFrames: VIDEO_LENGTH + OUTRO_LENGTH,
+    durationInFrames: VIDEO_LENGTH + OUTRO_DURATION_IN_FRAMES,
     height,
     width,
   };
