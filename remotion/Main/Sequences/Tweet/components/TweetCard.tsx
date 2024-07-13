@@ -1,5 +1,5 @@
 import { Img } from "remotion"
-import { TweetDefinitelyExists } from "../../../../types/constants"
+import { TweetDefinitelyExists } from "../../../../../types/constants"
 
 const PHOTO_STYLES = {
   borderRadius: "3%",

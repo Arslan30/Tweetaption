@@ -40,8 +40,9 @@ export const TweetMediaIsPhoto = z.object({
 
 export const TweetMediaIsAnimatedGif = z.object({
   type: z.literal('animated_gif'),
-  url: z.string().url(),
+  poster: z.string().url(),
   size: mediaSizeSchema,
+  video: videoSchema,
 })
 
 export const TweetMediaIsCard = z.object({

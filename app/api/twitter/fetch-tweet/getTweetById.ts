@@ -87,10 +87,15 @@ const tweetBuilder = (syndicationTweet: (Tweet | TweetParent | QuotedTweet) & {
       } else {
         return {
           type: "animated_gif",
-          url: media.media_url_https,
+          poster: media.media_url_https,
           size: {
             height: media.sizes.large.h,
             width: media.sizes.large.w,
+          },
+          video: {
+            bitrate: media.video_info.variants[0].bitrate ?? null,
+            url: media.video_info.variants[0].url,
+            duration_millis: 6000,
           }
 
         }
