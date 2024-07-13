@@ -23,12 +23,14 @@ const VideoTweetMediaSwitch = (props: TweetDefinitelyExists & {
     }
   } else if (media.type === "card") {
     return <TweetCard {...props} isPure={props.isPure} />
-  } else {
+  } else if (media.type === "photo") {
     if (props.isPure) {
       return <PureTweetPhoto {...props} />
     } else {
       return <TweetPhoto {...props} />
     }
+  } else {
+    throw new Error("Unsupported media type: " + media.type)
   }
 }
 
