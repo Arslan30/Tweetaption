@@ -1,6 +1,6 @@
 const GoldVerifiedIcon = () => {
   return (
-    <svg viewBox="0 0 22 22" aria-label="Verified business account" role="img" style={{ width: '1em', flexShrink: 0 }}>
+    <svg viewBox="0 0 22 22" aria-label="Verified business account" role="img" style={{ width: '1rem', flexShrink: 0 }}>
       <g>
         <linearGradient gradientUnits="userSpaceOnUse" id="27-a" x1="4.411" x2="18.083" y1="2.495" y2="21.508">
           <stop offset="0" stop-color="#f4e72a"></stop>

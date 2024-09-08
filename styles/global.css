@@ -13,8 +13,8 @@
     --geist-font: "Indie Flower", cursive;
 
     --tweet-font: "Roboto", sans-serif;
-    --tweet-font-size: 30px;
-    --tweet-sm-font-size: 22.5px;
+    --tweet-font-size: 30px * 1rem;
+    --tweet-sm-font-size: 22.5px * 1rem;
     --max-frame-width: 768px;
 
   }

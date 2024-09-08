@@ -1,26 +1,6 @@
 import React from "react"
 import { TweetDefinitelyExists } from "../../../../../../types/constants"
-import VerifiedIcon from "./BlueVerifiedIcon"
-import GoldVerifiedIcon from "./GoldVerifiedIcon"
-import GrayVerifiedIcon from "./GrayVerifiedIcon"
-
-const TweetAuthorName = ({ tweet }: TweetDefinitelyExists) => {
-  return (
-    <div style={{ display: 'flex', fontWeight: 700, gap: '4px', alignItems: 'center' }}>
-      <div style={{ whiteSpace: 'nowrap' }}>{tweet.user.name}</div>
-      {!tweet.user.is_blue_verified ? null : (
-        tweet.user.verified_type === "Business" ? (
-          <GoldVerifiedIcon />
-        ) : tweet.user.verified_type === "Government" ? (
-          <GrayVerifiedIcon/>
-        ) : (
-          <VerifiedIcon />
-        )
-      )}
-    </div>
-
-  )
-}
+import { TweetAuthorName } from "./TweetAuthorName"
 
 const TweetHeaderUnMemoized = (props: TweetDefinitelyExists) => {
   const GAP_BETWEEN_AVATAR_AND_TEXT = '0.6em'

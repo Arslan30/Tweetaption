@@ -18,7 +18,7 @@ export const getTweetById = async (tweetId: string) => {
 const tweetBuilder = (syndicationTweet: (Tweet | TweetParent | QuotedTweet) & {
   card?: any
 }) => {
-  let textHtml = syndicationTweet.text
+  let textHtml = syndicationTweet.text.trim()
 
   syndicationTweet.entities.hashtags.forEach(hashtag => {
     textHtml = textHtml.replace(`#${hashtag.text}`, `<a class="hashtag" href="https://twitter.com/hashtag/${hashtag.text}">#${hashtag.text}</a>`)

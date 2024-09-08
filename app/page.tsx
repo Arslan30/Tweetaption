@@ -33,7 +33,7 @@ const RenderPlayer = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
 
   const { value: metadata, loading: metadataLoading } = useAsyncRefresh(async () => {
     return await CALCULATE_RENDER_DIMENSIONS({ tweet, renderSettings });
-  }, [tweet.id]);
+  }, [tweet.id, JSON.stringify(renderSettings)]);
 
   if (!metadata || metadataLoading) {
     return <div className="flex items-center animate-pulse justify-center w-full bg-gray-200 overflow-hidden rounded-lg" style={{ height: 600, width: "100%" }}></div>
