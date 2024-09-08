@@ -17,7 +17,7 @@ export const EditSettings = ({
           <div className="text-lg font-geist text-rose-400 font-bold mb-4 text-lg">Settings</div>
           <div className="flex flex-col gap-3.5">
             <Checkbox
-            label={tweet.quoted_tweet ? "Include the tweet being replied to." : "Include the tweet being replied to. (Unavailable for this tweet)"}
+            label={tweet.parent ? "Include the tweet being replied to." : "Include the tweet being replied to. (Unavailable for this tweet)"}
             disabled={!tweet.parent}
             isChecked={settings.includeParent}
             setIsChecked={() => {

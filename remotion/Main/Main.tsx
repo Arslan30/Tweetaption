@@ -14,7 +14,7 @@ export const Main = ({ tweet, renderSettings }: z.infer<typeof CompositionProps>
   if (tweet === null) {
     return
   }
-  
+
   return (
     <AbsoluteFill className="bg-white">
       <ClosingSeq/>

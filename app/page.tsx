@@ -17,6 +17,7 @@ import Image from 'next/image'
 import { CALCULATE_RENDER_DIMENSIONS } from "../remotion/Main/CALCULATE_RENDER_DIMENSIONS";
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
 import { RenderControls } from "../components/homepage/RenderControls";
+import { EditSettings } from "../components/homepage/EditSettings";
 
 const RenderPlayer = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
   const player = useRef<PlayerRef>(null)
@@ -26,7 +27,7 @@ const RenderPlayer = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
 
     return {
       tweet,
-      renderSettings
+      renderSettings: {...renderSettings}
     };
   }, [tweet.id, JSON.stringify(renderSettings)]);
 
@@ -62,7 +63,7 @@ const RenderPlayer = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
 const RenderTweet = ({ tweet }: {
   tweet: TweetSchemaType
 }) => {
-  const [renderSettings] = useState<RenderSettingsSchemaType>({
+  const [renderSettings, setRenderSettings] = useState<RenderSettingsSchemaType>({
     includeParent: false,
     includeQuoted: false,
     mediaIndex: 0
@@ -73,7 +74,7 @@ const RenderTweet = ({ tweet }: {
       <div className="overflow-hidden rounded-lg border mb-8 mt-8">
         <RenderPlayer tweet={tweet} renderSettings={renderSettings} />
       </div>
-      {/* <EditSettings tweet={tweet} settings={renderSettings} setSettings={setRenderSettings} /> */}
+      <EditSettings tweet={tweet} settings={renderSettings} setSettings={setRenderSettings} />
       <RenderControls tweet={tweet} renderSettings={renderSettings} />
     </div>
   )
