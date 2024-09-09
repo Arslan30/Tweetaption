@@ -9,6 +9,7 @@ import { RenderRequest } from "../../../../types/schema";
 import { TweetDefinitelyExists } from "../../../../types/constants";
 import { getTweetById } from "../../twitter/fetch-tweet/getTweetById";
 import { supabase } from "../../supabase";
+import crypto from 'crypto';
 
 export const POST = executeApi<{
   bucketName: string;
@@ -16,6 +17,7 @@ export const POST = executeApi<{
 }, typeof RenderRequest>(
   RenderRequest,
   async (req, body) => {
+    const version = (process.env as any).version as string
     if (
       !process.env.AWS_ACCESS_KEY_ID &&
       !process.env.REMOTION_AWS_ACCESS_KEY_ID
@@ -33,15 +35,19 @@ export const POST = executeApi<{
       );
     }
 
+    const sortedRenderSettingsJson = JSON.stringify(body.renderSettings, Object.keys(body.renderSettings).sort());
+    const renderSettingsMd5 = crypto.createHash('md5').update(sortedRenderSettingsJson).digest('hex');
+    const uniquekey = `${body.tweetId}-${version}-${renderSettingsMd5}`
 
     // RETRIEVE FROM CACHE
 
     const { data: renders } = await supabase
       .from('renders')
       .select("*")
-      .eq('tweet_id', body.tweetId)
+      .eq('uniquekey', uniquekey)
 
     if (renders && renders.length > 0) {
+      console.log(`Found existing render (${uniquekey}) ->`, renders[0].render_id)
       return {
         bucketName: renders[0].bucket_name,
         renderId: renders[0].render_id,
@@ -80,6 +86,9 @@ export const POST = executeApi<{
           bucket_name: result.bucketName,
           tweet_id: body.tweetId,
           tweet: tweet,
+          version,
+          render_settings: body.renderSettings,
+          uniquekey
         }
       ])
       .select()
