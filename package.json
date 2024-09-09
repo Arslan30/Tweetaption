@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "author": {
-    "name": "Mohit Yadav",
-    "email": "mohit@mohitya.dev",
-    "url": "https://mohitya.dev"
+    "name": "clynergy",
+    "email": "me@zlenner.com",
+    "url": "https://twitter.com/clynergy"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.174",

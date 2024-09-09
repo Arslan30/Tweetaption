@@ -26,7 +26,7 @@ const TweetMediaSwitch = (props: TweetDefinitelyExists & {
       return <TweetPhoto {...props} />
     }
   } else {
-    throw new Error("Unsupported media type: " + media.type)
+    throw new Error("Unsupported media type: " + (media as any).type)
   }
 }
 
