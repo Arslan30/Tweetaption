@@ -1,4 +1,4 @@
-import { AbsoluteFill, Freeze, Sequence, useVideoConfig } from "remotion";
+import { AbsoluteFill, Freeze, Img, Sequence, staticFile, useVideoConfig } from "remotion";
 import TweetHeader from "./components/TweetHeader/TweetHeader";
 import { TweetDefinitelyExists, TweetSchemaType } from "../../../../types/constants";
 import TweetText from "./components/TweetText";
@@ -24,6 +24,14 @@ export const PureVideoTweet = (props: TweetDefinitelyExists) => {
   )
 }
 
+const Watermark = () => {
+  return (
+    <div className="absolute top-4 right-7">
+      <Img src={staticFile("/logo.png")} style={{height: "3.3rem"}} />
+    </div>
+  )
+}
+
 const VideoTweet = (props: TweetDefinitelyExists) => {
   const { fps, durationInFrames } = useVideoConfig();
   const end = durationInFrames - (fps * 1);
@@ -32,6 +40,7 @@ const VideoTweet = (props: TweetDefinitelyExists) => {
     <Sequence durationInFrames={end}>
       <AbsoluteFill>
         <div className="flex flex-col h-fit p-6 bg-white w-full">
+          <Watermark/>
           {props.renderSettings.includeParent && props.tweet.parent && (
             <Freeze frame={fps}>
               <ParentTweet {...props} tweet={props.tweet.parent as TweetSchemaType} isPure={false} />
