@@ -18,6 +18,8 @@ import { CALCULATE_RENDER_DIMENSIONS } from "../remotion/Main/CALCULATE_RENDER_D
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
 import { RenderControls } from "../components/homepage/RenderControls";
 import { EditSettings } from "../components/homepage/EditSettings";
+import { Button } from "../components/generic/Button";
+import { FaWhatsapp } from "react-icons/fa";
 
 const RenderPlayer = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
   const player = useRef<PlayerRef>(null)
@@ -90,6 +92,15 @@ const Home: NextPage = () => {
         <a href="/">
           <Image src="/logo.png" alt="logo" width={120} height={120} />
         </a>
+        <div className="flex flex-col ml-auto text-2xl font-geist text-green-600 font-bold">
+          <a href="https://whatsapp.com/channel/0029ValZmomDOQIRwdHRv00A" target="_blank">
+            <Button className="flex ml-auto items-center leading-none	mb-4 bg-[#25D366] hover:bg-[#16a34b] active:bg-[#15803e]">
+              <FaWhatsapp className="mr-3"/>
+              <span className="mt-1 font-bold">Join Now</span>
+            </Button>
+          </a>
+          Join our news channel for Pakistan!
+        </div>
       </div>
       <div style={{ maxWidth: "var(--max-frame-width)" }} className="text-5xl font-geist text-amber-500 font-bold mx-auto">{"Grab any tweet as a video, without losing context."}</div>
       <div className="flex flex-col w-full mx-auto" style={{ maxWidth: "var(--max-frame-width)" }}>
