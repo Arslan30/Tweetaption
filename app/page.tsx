@@ -18,8 +18,8 @@ import { CALCULATE_RENDER_DIMENSIONS } from "../remotion/Main/CALCULATE_RENDER_D
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
 import { RenderControls } from "../components/homepage/RenderControls";
 import { EditSettings } from "../components/homepage/EditSettings";
-import { Button } from "../components/generic/Button";
-import { FaWhatsapp } from "react-icons/fa";
+// import { Button } from "../components/generic/Button";
+// import { FaWhatsapp } from "react-icons/fa";
 
 const RenderPlayer = ({ tweet, renderSettings }: TweetDefinitelyExists) => {
   const player = useRef<PlayerRef>(null)
