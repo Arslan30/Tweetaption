@@ -1,7 +1,7 @@
 # tweeto.lol
 Turn a video tweet into mp4, original tweet and all (thanks to Ryan of ProductHunt for the better tagline).
 
-Launched on ProductHunt in 2024 and Twitter at the same time, this tool was originally meant so people in Pakistan could easily share Twitter videos *outside* the platform, without losing context (Twitter had been banned in Pakistan after a wave of protests and a regime fearful of criticism).
+Launched on [ProductHunt](https://www.producthunt.com/products/tweeto-lol) in 2024 and Twitter at the same time, this tool was originally meant so people in Pakistan (as you can tell from its front page) could easily share Twitter videos *outside* the platform, without losing context (Twitter had been banned in Pakistan after a wave of protests and a regime fearful of criticism).
 
 Don't have the attention to continously maintain the app so it was offline most of this year.
 
