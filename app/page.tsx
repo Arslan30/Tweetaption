@@ -102,7 +102,7 @@ const Home: NextPage = () => {
           Join our news channel for Pakistan!
         </div> */}
       </div>
-      <div style={{ maxWidth: "var(--max-frame-width)" }} className="text-5xl font-geist text-amber-500 font-bold mx-auto">{"Grab any tweet as a video, without losing context."}</div>
+      <div style={{ maxWidth: "var(--max-frame-width)" }} className="text-5xl font-geist text-amber-500 font-bold mx-auto">{"Download video tweets as mp4, frame included."}</div>
       <div className="flex flex-col w-full mx-auto" style={{ maxWidth: "var(--max-frame-width)" }}>
         <TweetInput
           tweet={tweet}
@@ -127,7 +127,7 @@ const Home: NextPage = () => {
         >
           <img
             src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=466740&theme=light"
-            alt="tweeto&#0046;lol - Grab&#0032;any&#0032;tweet&#0039;s&#0032;video&#0044;&#0032;without&#0032;losing&#0032;context&#0046; | Product Hunt"
+            alt="tweeto.lol - Download video tweets as mp4, frame included | Product Hunt link"
             style={{ width: 'auto', height: '2em' }}
             width="250"
             height="54"

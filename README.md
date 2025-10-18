@@ -7,7 +7,7 @@ https://github.com/user-attachments/assets/dcd62283-9b2f-447b-88fc-bb580fce4ede
 
 ## Background
 
-Launched on [ProductHunt](https://www.producthunt.com/products/tweeto-lol) in 2024 and Twitter at the same time, this tool was originally meant so people in Pakistan (as you can tell from its front page) could easily share Twitter videos *outside* the platform, without losing context (Twitter had been banned in Pakistan after a wave of protests and a regime fearful of criticism).
+Launched on [ProductHunt](https://www.producthunt.com/products/tweeto-lol) in 2024 and Twitter at the same time, this tool was originally meant so people in Pakistan (as you can tell from its front page) could easily share Twitter videos *outside* the platform, without losing the frame (Twitter had been banned in Pakistan after a wave of protests and a regime fearful of criticism).
 
 Don't have the attention to continously maintain the app so it was offline most of this year.
 
