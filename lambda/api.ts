@@ -5,8 +5,6 @@ import {
   FetchTweetResponse,
   ProgressRequest,
   ProgressResponse,
-  RecentlyGrabbedRequest,
-  RecentlyGrabbedResponse,
   RenderRequest,
 } from "../types/schema";
 import { ApiResponse } from "../helpers/api-response";
@@ -58,6 +56,3 @@ export const fetchTweet = async ({tweetId}: z.infer<typeof FetchTweetRequest>) =
   });
 }
 
-export const recentlyGrabbedTweets = async ({}: z.infer<typeof RecentlyGrabbedRequest>) => {
-  return makeRequest<RecentlyGrabbedResponse>("/api/twitter/recently-grabbed", {} );
-}

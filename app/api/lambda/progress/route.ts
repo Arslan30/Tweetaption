@@ -7,6 +7,7 @@ import { DISK, RAM, REGION, TIMEOUT } from "../../../../config.mjs";
 import { executeApi } from "../../../../helpers/api-response";
 import { ProgressRequest, ProgressResponse } from "../../../../types/schema";
 import { supabase } from "../../supabase";
+import { SUPABASE_VARS } from "../../../../lib/supabase-status";
 
 export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
   ProgressRequest,
@@ -37,17 +38,23 @@ export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
     }
 
     if (renderProgress.done) {
-      await supabase
-        .from('renders')
-        .update(
-          {
-            video_url: renderProgress.outputFile as string,
-            size: renderProgress.outputSizeInBytes as number,
-            generated_at: new Date(renderProgress.renderMetadata!.startedDate + (renderProgress.timeToFinish ?? 0)),
-          }
-        )
-        .eq('render_id', body.id)
-        .select()
+      console.log("render done ->", body.id)
+      // UPDATE CACHE WITH FINAL RESULT
+      if (SUPABASE_VARS) {
+        await supabase
+          .from('renders')
+          .update(
+            {
+              video_url: renderProgress.outputFile as string,
+              size: renderProgress.outputSizeInBytes as number,
+              generated_at: new Date(renderProgress.renderMetadata!.startedDate + (renderProgress.timeToFinish ?? 0)),
+            }
+          )
+          .eq('render_id', body.id)
+          .select()    
+        
+        console.log("updated status in cache ->", body.id)
+      }
 
       return {
         type: "done",

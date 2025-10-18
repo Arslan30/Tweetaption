@@ -32,6 +32,3 @@ export type ProgressResponse =
     });
 
     export type FetchTweetResponse = TweetSchemaType
-
-    export const RecentlyGrabbedRequest = z.object({})
-    export type RecentlyGrabbedResponse = TweetSchemaType[]

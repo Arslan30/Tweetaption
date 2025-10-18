@@ -9,6 +9,7 @@ import { RenderRequest } from "../../../../types/schema";
 import { TweetDefinitelyExists } from "../../../../types/constants";
 import { getTweetById } from "../../twitter/fetch-tweet/getTweetById";
 import { supabase } from "../../supabase";
+import { SUPABASE_VARS } from "../../../../lib/supabase-status";
 import crypto from 'crypto';
 
 export const POST = executeApi<{
@@ -41,16 +42,20 @@ export const POST = executeApi<{
 
     // RETRIEVE FROM CACHE
 
-    const { data: renders } = await supabase
-      .from('renders')
-      .select("*")
-      .eq('uniquekey', uniquekey)
+    if (SUPABASE_VARS) {
+      const { data: renders } = await supabase
+        .from('renders')
+        .select("*")
+        .eq('uniquekey', uniquekey)
 
-    if (renders && renders.length > 0) {
-      console.log(`Found existing render (${uniquekey}) ->`, renders[0].render_id)
-      return {
-        bucketName: renders[0].bucket_name,
-        renderId: renders[0].render_id,
+      console.log(`searched in cache (${uniquekey})`)
+
+      if (renders && renders.length > 0) {
+        console.log(`Found existing render (${uniquekey}) ->`, renders[0].render_id)
+        return {
+          bucketName: renders[0].bucket_name,
+          renderId: renders[0].render_id,
+        }
       }
     }
 
@@ -78,20 +83,25 @@ export const POST = executeApi<{
       },
     });
 
-    await supabase
-      .from('renders')
-      .insert([
-        {
-          render_id: result.renderId,
-          bucket_name: result.bucketName,
-          tweet_id: body.tweetId,
-          tweet: tweet,
-          version,
-          render_settings: body.renderSettings,
-          uniquekey
-        }
-      ])
-      .select()
+    // CACHE THE RENDER
+    if (SUPABASE_VARS) {
+      await supabase
+        .from('renders')
+        .insert([
+          {
+            render_id: result.renderId,
+            bucket_name: result.bucketName,
+            tweet_id: body.tweetId,
+            tweet: tweet,
+            version,
+            render_settings: body.renderSettings,
+            uniquekey
+          }
+        ])
+        .select()
+
+      console.log(`saved to cache -> ${result.renderId}`)
+    }
 
     return {
       bucketName: result.bucketName,
