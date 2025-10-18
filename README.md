@@ -72,4 +72,4 @@ Wait a few min then try again. AWS takes time to propagate changes, even after i
 *how to fix*
 [https://www.remotion.dev/docs/lambda/troubleshooting/rate-limit](https://www.remotion.dev/docs/lambda/troubleshooting/rate-limit)
 
-It took me almost nearly 24 hours for approval, good luck.
+It took me almost nearly 4 hours for approval, good luck.
