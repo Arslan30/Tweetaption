@@ -1,13 +1,19 @@
 # tweeto.lol
 Turn a video tweet into mp4, original tweet and all (thanks to Ryan of ProductHunt for the better tagline).
 
+## How it works
+
+https://github.com/user-attachments/assets/dcd62283-9b2f-447b-88fc-bb580fce4ede
+
+## Background
+
 Launched on [ProductHunt](https://www.producthunt.com/products/tweeto-lol) in 2024 and Twitter at the same time, this tool was originally meant so people in Pakistan (as you can tell from its front page) could easily share Twitter videos *outside* the platform, without losing context (Twitter had been banned in Pakistan after a wave of protests and a regime fearful of criticism).
 
 Don't have the attention to continously maintain the app so it was offline most of this year.
 
 Making it public if anyone else wants to run it (although it is annoying), I've made it as easily possible to in what I could — but AWS (where it is designed to be deployed) makes it a living hell.
 
-## How to setup app
+## How to set it up
 
 Use `pnpm` instead of `npm`, it's a better drop-in solution.
 
@@ -34,7 +40,7 @@ This app uses remotion, so a lot of support can be found on there:
 - __Discord:__ Remotion provides help on their [Discord server](https://remotion.dev/discord).
 - __Issue with Remotion?:__ [File an issue here](https://remotion.dev/issue).
 
-## Common Errors when deploying to AWS.
+## Common Errors when deploying to AWS
 
 ### AccessDenied
 
@@ -57,11 +63,11 @@ Function not found: arn:aws:lambda:us-east-1:136693839206:function:remotion-rend
 
 Your setup was successful! But you didn't deploy the function yet, do that with `npm run deploy`.
 
-### You fixed the set up but getting the same error as before.
+### You fixed the set up but getting the same error as before
 
 Wait a few min then try again. AWS takes time to propagate changes, even after it shows up as successful on the dashboard.
 
-### Rate Exceeded (you WILL likely run into this error)
+### Rate Exceeded (likely to run into this error if this is the first time your AWS account is using Lambda properly)
 
 *how to fix*
 [https://www.remotion.dev/docs/lambda/troubleshooting/rate-limit](https://www.remotion.dev/docs/lambda/troubleshooting/rate-limit)
