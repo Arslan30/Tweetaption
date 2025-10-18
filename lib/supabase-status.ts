@@ -1,3 +1,5 @@
+import { createClient } from "@supabase/supabase-js";
+
 // Get environment variables
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
@@ -17,16 +19,13 @@ console.log(`
 ┌────────────────────────────────────────────────────────────┐
 │                    SUPABASE CACHING                        │
 ├────────────────────────────────────────────────────────────┤
-│ ${bothAvailable ? '✓' : '✗'} ${bothAvailable ? 'AVAILABLE'.padEnd(57) : 'NOT AVAILABLE'.padEnd(59)}|
-│ - SUPABASE_URL: ${(supabaseUrl || '').padEnd(40)}   │
-│ - SUPABASE_KEY: ${maskedKey.padEnd(40)}   │
+│ ${bothAvailable ? '✓' : '✗'} ${bothAvailable ? 'AVAILABLE'.padEnd(57) : 'NOT AVAILABLE'.padEnd(57)}│
+│ - SUPABASE_URL: ${(supabaseUrl || '').padEnd(43)}│
+│ - SUPABASE_KEY: ${maskedKey.padEnd(43)}│
 └────────────────────────────────────────────────────────────┘
 `);
 
-// Export SUPABASE_VARS directly
-export const SUPABASE_VARS = bothAvailable 
-  ? {
-      url: supabaseUrl,
-      key: supabaseKey
-    }
+// Create and export Supabase client instance (optionally null)
+export const supabase = bothAvailable 
+  ? createClient(supabaseUrl, supabaseKey)
   : null;

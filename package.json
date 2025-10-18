@@ -1,11 +1,11 @@
 {
-  "name": "tweeto",
+  "name": "tweeto.lol",
   "version": "2.1",
   "private": true,
   "author": {
-    "name": "clynergy",
+    "name": "clynergy/zlenner (both x accs now deactivated)",
     "email": "me@zlenner.com",
-    "url": "https://twitter.com/clynergy"
+    "url": "https://github.com/zlenner/tweeto.lol"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.174",

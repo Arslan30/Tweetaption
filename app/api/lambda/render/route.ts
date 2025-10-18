@@ -8,8 +8,7 @@ import { executeApi } from "../../../../helpers/api-response";
 import { RenderRequest } from "../../../../types/schema";
 import { TweetDefinitelyExists } from "../../../../types/constants";
 import { getTweetById } from "../../twitter/fetch-tweet/getTweetById";
-import { supabase } from "../../supabase";
-import { SUPABASE_VARS } from "../../../../lib/supabase-status";
+import { supabase } from "../../../../lib/supabase-status";
 import crypto from 'crypto';
 
 export const POST = executeApi<{
@@ -42,7 +41,7 @@ export const POST = executeApi<{
 
     // RETRIEVE FROM CACHE
 
-    if (SUPABASE_VARS) {
+    if (supabase) {
       const { data: renders } = await supabase
         .from('renders')
         .select("*")
@@ -84,7 +83,7 @@ export const POST = executeApi<{
     });
 
     // CACHE THE RENDER
-    if (SUPABASE_VARS) {
+    if (supabase) {
       await supabase
         .from('renders')
         .insert([

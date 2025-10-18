@@ -6,8 +6,7 @@ import {
 import { DISK, RAM, REGION, TIMEOUT } from "../../../../config.mjs";
 import { executeApi } from "../../../../helpers/api-response";
 import { ProgressRequest, ProgressResponse } from "../../../../types/schema";
-import { supabase } from "../../supabase";
-import { SUPABASE_VARS } from "../../../../lib/supabase-status";
+import { supabase } from "../../../../lib/supabase-status";
 
 export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
   ProgressRequest,
@@ -40,7 +39,7 @@ export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
     if (renderProgress.done) {
       console.log("render done ->", body.id)
       // UPDATE CACHE WITH FINAL RESULT
-      if (SUPABASE_VARS) {
+      if (supabase) {
         await supabase
           .from('renders')
           .update(
