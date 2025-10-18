@@ -1,82 +1,40 @@
 # tweeto.lol
-<img src="https://github.com/remotion-dev/template-next/assets/1629785/9092db5f-7c0c-4d38-97c4-5f5a61f5cc098" />
-<br/>
-<br/>
+Turn a video tweet into mp4, original tweet and all (thanks to Ryan of ProductHunt for the better tagline).
 
-This is a Next.js template for building programmatic video apps, with [`@remotion/player`](https://remotion.dev/player) and [`@remotion/lambda`](https://remotion.dev/lambda) built in.
+Launched on ProductHunt in 2024 and Twitter at the same time, this tool was originally meant so people in Pakistan could easily share Twitter videos *outside* the platform, without losing context (Twitter had been banned in Pakistan after a wave of protests and a regime fearful of criticism).
 
-This template uses the Next.js App directory, with TailwindCSS. There is a [Non-TailwindCSS version](https://github.com/remotion-dev/template-next-app-dir), and a [Pages directory version](https://github.com/remotion-dev/template-next-pages-dir) of this template available.
+Don't have the attention to continously maintain the app so it was offline most of this year.
 
-<img src="https://github.com/remotion-dev/template-next/assets/1629785/c9c2e5ca-2637-4ec8-8e40-a8feb5740d88" />
+Making it public if anyone else wants to run it (although it is annoying), I've made it as easily possible to in what I could — but AWS (where it is designed to be deployed) makes it a living hell.
 
-## Getting Started
+## How to setup app
 
-[Use this template](https://github.com/new?template_name=template-next-app-dir-tailwind&template_owner=remotion-dev) to clone it into your GitHub account. Run
+Use `pnpm` instead of `npm`, it's a better drop-in solution.
 
-```
-npm i
-```
+1. Clone app, `git clone https://github.com/zlenner/tweeto.lol`
+2. Go to the directory, cd `tweeto.lol`
+3. `npm install -g pnpm` if you don't have it (but npm will work too.)
+4. `pnpm install` (npm will work too)
+5. npm run dev
 
-afterwards. Alternatively, use this command to scaffold a project:
+Now, the app should be running but you need to get do a bit of setup to connect to your AWS account and use in production and click on the "Generate Download Link" button.
 
-```
-npx create-video@latest --next-tailwind
-```
+The app uses [Remotion Lambda](https://remotion.dev/lambda).
 
-## Commands
+1. First, copy the `.env.example` file to `.env`.
 
-Start the Next.js dev server:
+2. Complete the [Lambda setup guide](https://www.remotion.dev/docs/lambda/setup) to get your AWS credentials and fill in the values.
 
-```
-npm run dev
-```
+1. Edit the `config.mjs` file to your desired Lambda settings (name etc.), the rest you can leave untouched unless you know what you're doing.
 
-Open the Remotion Studio:
+1. Run `npm run deploy` to deploy your Lambda function and Remotion Bundle.
 
-```
-npm run remotion
-```
+This app uses remotion, so a lot of support can be found on there:
+- __Docs:__ Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
+- __Discord:__ Remotion provides help on their [Discord server](https://remotion.dev/discord).
+- __Issue with Remotion?:__ [File an issue here](https://remotion.dev/issue).
 
-The following script will set up your Remotion Bundle and Lambda function on AWS:
-
-```
-node deploy.mjs
-```
-
-You should run this script after:
-
-- changing the video template
-- changing `config.mjs`
-- upgrading Remotion to a newer version
-
-## Set up rendering on AWS Lambda
-
-This template supports rendering the videos via [Remotion Lambda](https://remotion.dev/lambda).
-
-1. Copy the `.env.example` file to `.env` and fill in the values.
-   Complete the [Lambda setup guide](https://www.remotion.dev/docs/lambda/setup) to get your AWS credentials.
-
-1. Edit the `config.mjs` file to your desired Lambda settings.
-
-1. Run `node deploy.mjs` to deploy your Lambda function and Remotion Bundle.
-
-## Docs
-
-Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
-
-## Help
-
-We provide help on our [Discord server](https://remotion.dev/discord).
-
-## Issues
-
-Found an issue with Remotion? [File an issue here](https://remotion.dev/issue).
-
-## License
-
-Note that for some entities a company license is needed. [Read the terms here](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).
-
-## Common Errors
+## Common Errors when deploying to AWS.
 
 ### AccessDenied
 
@@ -101,9 +59,11 @@ Your setup was successful! But you didn't deploy the function yet, do that with 
 
 ### You fixed the set up but getting the same error as before.
 
-Wait a few min then try again. AWS takes time to propagate changes, even if it shows up as successful on the dashboard.
+Wait a few min then try again. AWS takes time to propagate changes, even after it shows up as successful on the dashboard.
 
-### Rate Exceeded
+### Rate Exceeded (you WILL likely run into this error)
 
 *how to fix*
 [https://www.remotion.dev/docs/lambda/troubleshooting/rate-limit](https://www.remotion.dev/docs/lambda/troubleshooting/rate-limit)
+
+It took me almost nearly 24 hours for approval, good luck.
