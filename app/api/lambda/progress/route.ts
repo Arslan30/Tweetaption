@@ -6,7 +6,7 @@ import {
 import { DISK, RAM, REGION, TIMEOUT } from "../../../../config.mjs";
 import { executeApi } from "../../../../helpers/api-response";
 import { ProgressRequest, ProgressResponse } from "../../../../types/schema";
-import { supabase } from "../../../../lib/supabase-status";
+import { supabase } from "../../supabase";
 
 export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
   ProgressRequest,

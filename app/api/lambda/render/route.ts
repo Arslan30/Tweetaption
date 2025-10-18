@@ -8,7 +8,7 @@ import { executeApi } from "../../../../helpers/api-response";
 import { RenderRequest } from "../../../../types/schema";
 import { TweetDefinitelyExists } from "../../../../types/constants";
 import { getTweetById } from "../../twitter/fetch-tweet/getTweetById";
-import { supabase } from "../../../../lib/supabase-status";
+import { supabase } from "../../supabase";
 import crypto from 'crypto';
 
 export const POST = executeApi<{
