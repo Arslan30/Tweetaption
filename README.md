@@ -1,6 +1,8 @@
 # tweeto.lol
 Turn a video tweet into mp4, original tweet and all (thanks to Ryan of ProductHunt for the better tagline).
 
+Live version is back up now, [as of today](https://github.com/zlenner/tweeto.lol/issues/1#issue-3529342987). We'll see what to do when the money I topped up runs out.
+
 ## How it works
 
 https://github.com/user-attachments/assets/dcd62283-9b2f-447b-88fc-bb580fce4ede
@@ -35,7 +37,7 @@ The app uses [Remotion Lambda](https://remotion.dev/lambda).
 
 1. Run `npm run deploy` to deploy your Lambda function and Remotion Bundle.
 
-This app uses remotion, so a lot of support can be found on there:
+This app uses remotion, so a lot of support can be found over there:
 - __Docs:__ Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
 - __Discord:__ Remotion provides help on their [Discord server](https://remotion.dev/discord).
 - __Issue with Remotion?:__ [File an issue here](https://remotion.dev/issue).
