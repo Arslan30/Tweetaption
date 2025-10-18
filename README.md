@@ -35,7 +35,7 @@ The app uses [Remotion Lambda](https://remotion.dev/lambda).
 
 1. Run `npm run deploy` to deploy your Lambda function and Remotion Bundle.
 
-This app uses remotion, so a lot of support can be found on there:
+This app uses remotion, so a lot of support can be found over there:
 - __Docs:__ Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
 - __Discord:__ Remotion provides help on their [Discord server](https://remotion.dev/discord).
 - __Issue with Remotion?:__ [File an issue here](https://remotion.dev/issue).
