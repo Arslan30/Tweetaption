@@ -1,3 +1,4 @@
+# tweeto.lol
 <img src="https://github.com/remotion-dev/template-next/assets/1629785/9092db5f-7c0c-4d38-97c4-5f5a61f5cc098" />
 <br/>
 <br/>
@@ -74,3 +75,35 @@ Found an issue with Remotion? [File an issue here](https://remotion.dev/issue).
 ## License
 
 Note that for some entities a company license is needed. [Read the terms here](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).
+
+## Common Errors
+
+### AccessDenied
+
+```
+AccessDenied: User: arn:aws:iam::XXXXXXXXXXXX:user/remotion-user is not authorized to perform: iam:SimulatePrincipalPolicy on resource: arn:aws:iam::XXXXXXXXXXXX:user/remotion-user because no identity-based policy allows the iam:SimulatePrincipalPolicy action
+```
+You might have skipped a step when doing all the setup on AWS's console. Happened to me.
+
+### Credit card not added to AWS account
+
+```
+Deploying Lambda function... 
+💡 This error indicates that you have a AWS account on the free tier or have been limited by your organization. Often times this can be solved by adding a credit card. See also: https://repost.aws/questions/QUKruWYNDYTSmP17jCnIz6IQ/questions/QUKruWYNDYTSmP17jCnIz6IQ/unable-to-set-lambda-memory-over-3008mb
+```
+### Function not found
+
+```
+Function not found: arn:aws:lambda:us-east-1:136693839206:function:remotion-render-4-0-174-mem3009mb-disk2048mb-480sec:$LATEST
+```
+
+Your setup was successful! But you didn't deploy the function yet, do that with `npm run deploy`.
+
+### You fixed the set up but getting the same error as before.
+
+Wait a few min then try again. AWS takes time to propagate changes, even if it shows up as successful on the dashboard.
+
+### Rate Exceeded
+
+*how to fix*
+[https://www.remotion.dev/docs/lambda/troubleshooting/rate-limit](https://www.remotion.dev/docs/lambda/troubleshooting/rate-limit)

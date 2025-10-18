@@ -30,6 +30,7 @@
     "react-timeago": "^7.2.0",
     "react-tweet": "^3.2.1",
     "react-use": "^17.5.0",
+    "remotion": "4.0.174",
     "tailwind-merge": "^2.2.2",
     "zod": "3.22.3"
   },
