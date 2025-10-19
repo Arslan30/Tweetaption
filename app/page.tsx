@@ -18,6 +18,7 @@ import { CALCULATE_RENDER_DIMENSIONS } from "../remotion/Main/CALCULATE_RENDER_D
 import useAsyncRefresh from "../helpers/useAsyncRefresh";
 import { RenderControls } from "../components/homepage/RenderControls";
 import { EditSettings } from "../components/homepage/EditSettings";
+import { GitHubButton } from "../components/generic/GitHubButton";
 // import { Button } from "../components/generic/Button";
 // import { FaWhatsapp } from "react-icons/fa";
 
@@ -88,10 +89,11 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex flex-col py-3 mb-3 px-4 w-full gap-6">
-      <div className="flex mb-6 mt-2 mx-auto w-full" style={{ maxWidth: "var(--max-frame-width)" }}>
+      <div className="flex mb-6 mt-2 mx-auto w-full justify-between items-start" style={{ maxWidth: "var(--max-frame-width)" }}>
         <a href="/">
           <Image src="/logo.png" alt="logo" width={120} height={120} />
         </a>
+        <GitHubButton href="https://github.com/zlenner/tweeto.lol" />
         {/* <div className="flex flex-col ml-auto text-2xl font-geist text-green-600 font-bold">
           <a href="https://whatsapp.com/channel/0029ValZmomDOQIRwdHRv00A" target="_blank">
             <Button className="flex ml-auto items-center leading-none	mb-4 bg-[#25D366] hover:bg-[#16a34b] active:bg-[#15803e]">
