@@ -26,6 +26,32 @@ Render tweet and X posts to MP4 locally while preserving the tweet frame.
 - Downloaded media assets are cached under `public/render-assets/`.
 - Remotion Studio is available with `pnpm remotion`.
 
+## Machine Requirements
+
+This project is not especially GPU-heavy, but local rendering benefits from a decent CPU, enough RAM, and fast SSD storage.
+
+Recommended for smooth local use:
+
+- 6 to 8 CPU cores
+- 16 GB RAM
+- SSD storage
+- Modern desktop or laptop CPU such as Ryzen 5 / Ryzen 7, Intel Core i5 / i7, or Apple Silicon M1 or newer
+
+Minimum usable setup:
+
+- 4 CPU cores
+- 8 GB RAM
+- SSD strongly recommended
+
+On the minimum setup, preview should still work, but MP4 rendering will be noticeably slower, especially for longer tweets or videos with remote media that must be downloaded first.
+
+Biggest performance factors:
+
+- CPU speed and core count affect render time the most
+- RAM helps when running Next.js, Remotion, and Chrome at the same time
+- SSD speed helps with cached media, frame generation, and final MP4 output
+- A dedicated GPU is optional for this workflow
+
 ## Notes
 
 - The app is built with Next.js and Remotion.
