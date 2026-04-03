@@ -2,6 +2,7 @@ import React from "react"
 import { TweetDefinitelyExists } from "../../../../../types/constants"
 import { TweetAuthorName } from "../components/TweetHeader/TweetAuthorName"
 import TimeAgo from 'react-timeago'
+import { getAssetSrc } from "../../../../../lib/remotion-asset-src"
 
 const formatTime = (value: number, unit: string) => {
   switch (unit) {
@@ -24,7 +25,7 @@ const SummarizedTweetHeaderUnMemoized = (props: TweetDefinitelyExists) => {
   return (
     <div className="flex text-tweet-sm items-center mb-[0.2em] font-tweet" style={{ gap: GAP_BETWEEN_AVATAR_AND_TEXT }}>
       <img
-        src={props.tweet.user.profile_image_url_https}
+        src={getAssetSrc(props.tweet.user.profile_image_url_https)}
         alt="User Avatar"
         className="border"
         style={{ width: AVATAR_SIZE, height: AVATAR_SIZE, borderRadius: '9999px' }}

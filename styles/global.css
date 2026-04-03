@@ -20,8 +20,10 @@
   }
 
   body {
-    background: rgb(238,189,174);
-    background: radial-gradient(circle, rgba(238,189,174,0.27356880252100846) 0%, rgba(238,232,69,0.2259497549019608) 100%);
-    
+    background:
+      radial-gradient(circle at top, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0) 28%),
+      radial-gradient(circle at 20% 12%, rgba(255, 214, 170, 0.35) 0%, rgba(255, 214, 170, 0) 32%),
+      radial-gradient(circle at 80% 18%, rgba(255, 241, 188, 0.42) 0%, rgba(255, 241, 188, 0) 28%),
+      linear-gradient(180deg, #f9f1de 0%, #fbf6eb 100%);
   }
 }

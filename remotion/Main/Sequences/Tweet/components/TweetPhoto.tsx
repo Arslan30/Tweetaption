@@ -1,5 +1,6 @@
 import { Img } from "remotion"
 import { TweetDefinitelyExists } from "../../../../../types/constants"
+import { getAssetSrc } from "../../../../../lib/remotion-asset-src"
 
 const PHOTO_STYLES = {
   borderRadius: "3%",
@@ -20,7 +21,7 @@ export const TweetPhoto = ({ tweet, renderSettings }: TweetDefinitelyExists) => 
       <Img
         alt="Tweet photo"
         style={{ ...PHOTO_STYLES }}
-        src={media.url}
+        src={getAssetSrc(media.url)}
       />
     </div>
   )
@@ -39,7 +40,7 @@ export const PureTweetPhoto = ({ tweet, renderSettings }: TweetDefinitelyExists)
       <img
       alt="Tweet photo"
       style={{ ...PHOTO_STYLES }}
-        src={media.url}
+        src={getAssetSrc(media.url)}
       />
     </div>
   )

@@ -3,7 +3,6 @@ import { spring, useCurrentFrame, interpolate } from "remotion";
 export const ClosingMark: React.FC = () => {
   const frame = useCurrentFrame();
 
-  // Base shaking intensity
   const shakeIntensity = spring({
     fps: 30,
     frame: frame,
@@ -14,7 +13,6 @@ export const ClosingMark: React.FC = () => {
     },
   });
 
-  // Additional randomness to the shake for x and y axis
   const shakeX = interpolate(shakeIntensity, [0, 1], [0, 10]);
   const shakeY = interpolate(shakeIntensity, [0, 1], [0, 10]);
 

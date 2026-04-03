@@ -22,7 +22,7 @@ export const RenderControls: React.FC<TweetDefinitelyExists> = (inputProps) => {
               loading={state.status === "invoking"}
               onClick={renderMedia}
             >
-              {state.status !== "invoking" && <FaLink className="mr-2" />} Generate Download Link
+              {state.status !== "invoking" && <FaLink className="mr-2" />} Render MP4 Locally
             </Button>
             {state.status === "error" ? (
               <ErrorComp message={state.error.message}></ErrorComp>

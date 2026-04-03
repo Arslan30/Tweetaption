@@ -1,20 +1,20 @@
 {
-  "name": "tweeto.lol",
+  "name": "tweet-video-renderer",
   "version": "2.1",
   "private": true,
   "author": {
     "name": "clynergy/zlenner (both x accs now deactivated)",
     "email": "me@zlenner.com",
-    "url": "https://github.com/zlenner/tweeto.lol"
+    "url": ""
   },
   "dependencies": {
     "@remotion/bundler": "4.0.174",
     "@remotion/cli": "4.0.174",
-    "@remotion/gif": "^4.0.174",
+    "@remotion/gif": "4.0.174",
     "@remotion/google-fonts": "4.0.174",
-    "@remotion/lambda": "4.0.174",
     "@remotion/paths": "4.0.174",
     "@remotion/player": "4.0.174",
+    "@remotion/renderer": "4.0.174",
     "@remotion/shapes": "4.0.174",
     "@remotion/tailwind": "4.0.174",
     "@supabase/supabase-js": "^2.43.5",

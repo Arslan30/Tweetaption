@@ -1,13 +1,11 @@
 export function GitHubButton({ 
-    owner = "zlenner", 
-    repo = "tweeto.lol", 
-    href = "https://github.com/zlenner/tweeto.lol"
+    owner = "GitHub", 
+    repo = "Source", 
+    href = "#"
   }) {
     return (
       <a 
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
         className="font-geist !font-bold inline-flex items-center gap-2 bg-transparent text-gray-900 px-2 py-1.5 hover:bg-gray-700/5 rounded-sm active:hover:bg-gray-700/10 transition-all duration-200"
       >
         {/* GitHub Logo */}

@@ -1,6 +1,6 @@
 import { AbsoluteFill, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Rings } from "./Rings";
-import { TweetoLogo } from "./TweetoLogo";
+import { ClosingMark } from "./ClosingMark";
 import { OUTRO_DURATION_IN_FRAMES } from "../../../../types/constants";
 import { Audio } from "remotion";
 
@@ -24,7 +24,7 @@ const ClosingSeq = ()  => {
       <Rings outProgress={logoOut}></Rings>
       <AbsoluteFill className="justify-center items-center">
         <Audio src={staticFile("outro.mp3")} />
-        <TweetoLogo></TweetoLogo>
+        <ClosingMark></ClosingMark>
       </AbsoluteFill>
     </Sequence>
 

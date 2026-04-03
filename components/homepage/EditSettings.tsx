@@ -49,6 +49,16 @@ export const EditSettings = ({
               })
             }}
             />
+            <Checkbox
+            label="Include audio"
+            isChecked={settings.includeAudio}
+            setIsChecked={() => {
+              setSettings({
+                ...settings,
+                includeAudio: !settings.includeAudio,
+              })
+            }}
+            />
           </div>
         </div>
       </div>

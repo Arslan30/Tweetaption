@@ -1,7 +1,7 @@
-# tweeto.lol
+# Tweet Video Renderer
 Turn a video tweet into mp4, original tweet and all (thanks to Ryan of ProductHunt for the better tagline).
 
-Live version is back up now, [as of today](https://github.com/zlenner/tweeto.lol/issues/1#issue-3529342987). We'll see what to do when the top-up runs out.
+Local-first setup for rendering tweet videos as MP4.
 
 ## How it works
 
@@ -9,7 +9,7 @@ https://github.com/user-attachments/assets/dcd62283-9b2f-447b-88fc-bb580fce4ede
 
 ## Background
 
-Launched on [ProductHunt](https://www.producthunt.com/products/tweeto-lol) in 2024 and Twitter at the same time, this tool was originally meant so people in Pakistan (as you can tell from its front page) could easily share Twitter videos *outside* the platform, without losing the frame (Twitter had been banned in Pakistan after a wave of protests and a regime fearful of criticism).
+This project renders tweet videos locally while preserving the tweet frame.
 
 Don't have the attention to continously maintain the app so it was offline most of this year.
 
@@ -19,8 +19,8 @@ Making it public if anyone else wants to run it (although it is annoying), I've 
 
 Use `pnpm` instead of `npm`, it's a better drop-in solution.
 
-1. Clone app, `git clone https://github.com/zlenner/tweeto.lol`
-2. Go to the directory, cd `tweeto.lol`
+1. Clone the app repository.
+2. Go to the project directory.
 3. `npm install -g pnpm` if you don't have it (but npm will work too.)
 4. `pnpm install` (npm will work too)
 5. npm run dev

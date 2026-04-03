@@ -3,6 +3,7 @@ import TweetText from "../components/TweetText";
 import { TweetDefinitelyExists, TweetSchemaType } from "../../../../../types/constants";
 import ParentTweetHeader from "./ParentTweetHeader";
 import QuotedTweet from "../QuotedTweet/QuotedTweet";
+import { getAssetSrc } from "../../../../../lib/remotion-asset-src";
 
 const ParentTweet = (props: TweetDefinitelyExists & {
   isPure: boolean
@@ -15,7 +16,7 @@ const ParentTweet = (props: TweetDefinitelyExists & {
     <div className="flex h-fit bg-white w-full mb-6"  style={{ gap: GAP_BETWEEN_AVATAR_AND_TEXT }}>
       <div className="flex flex-col items-center">
         <img
-          src={props.tweet.user.profile_image_url_https}
+          src={getAssetSrc(props.tweet.user.profile_image_url_https)}
           alt="User Avatar"
           className="border"
           style={{ width: AVATAR_SIZE, height: AVATAR_SIZE, minWidth: AVATAR_SIZE, minHeight: AVATAR_SIZE, borderRadius: '9999px' }}

@@ -1,5 +1,6 @@
 import { Img } from "remotion"
 import { TweetDefinitelyExists } from "../../../../../types/constants"
+import { getAssetSrc } from "../../../../../lib/remotion-asset-src"
 
 const PHOTO_STYLES = {
   borderRadius: "3%",
@@ -25,7 +26,7 @@ export const TweetCard = ({ tweet, renderSettings, isPure }: TweetDefinitelyExis
         <Component
           alt="Tweet photo"
           style={{ ...PHOTO_STYLES }}
-          src={media.poster}
+          src={getAssetSrc(media.poster)}
         />
         <div className="text-white absolute px-1.5 rounded-md" style={{backgroundColor: "rgba(0, 0, 0, 0.77)", left: "1rem", bottom: "1rem", width: "calc(100% - 2rem)", whiteSpace: "pre", textOverflow: "ellipsis", overflow: "hidden", wordBreak: "break-word"}}>{media.title}</div>
       </div>

@@ -1,10 +1,11 @@
 "use client";
 
 import { CalculateMetadataFunction } from "remotion";
-import { CompositionProps, DEFAULT_DURATION_IN_FRAMES, DEFAULT_VIDEO_HEIGHT, DEFAULT_VIDEO_WIDTH, OUTRO_DURATION_IN_FRAMES, TweetDefinitelyExists, VIDEO_FPS, defaultMainProps } from "../../types/constants";
+import { CompositionProps, DEFAULT_DURATION_IN_FRAMES, DEFAULT_VIDEO_HEIGHT, DEFAULT_VIDEO_WIDTH, TweetDefinitelyExists, VIDEO_FPS, defaultMainProps } from "../../types/constants";
 import { z } from "zod";
 import { createRoot } from 'react-dom/client';
 import { PureVideoTweet } from "./Sequences/Tweet/VideoTweet";
+import { getPrimaryDisplayedMedia, normalizeRenderSettings } from "../../lib/tweet-render";
 
 const oneTimeRender = (jsx: React.ReactNode) => {
   const body = document.querySelector("body")
@@ -40,43 +41,27 @@ const DEFAULT_DURATION_IN_SECONDS_FOR_PHOTO_TWEET = 5;
 export const CALCULATE_RENDER_DIMENSIONS = async ({ tweet, renderSettings }: TweetDefinitelyExists) => {
   console.log("calculating dimensions...")
 
-  const media = tweet.media[renderSettings.mediaIndex]
+  const normalizedSettings = normalizeRenderSettings(tweet, renderSettings);
+  const media = getPrimaryDisplayedMedia(tweet, normalizedSettings);
   const duration = !media ? DEFAULT_DURATION_IN_SECONDS_FOR_TEXT_TWEET : (
-    media.type === "video" ? media.video.duration_millis / 1000 : DEFAULT_DURATION_IN_SECONDS_FOR_PHOTO_TWEET
+    media.type === "video" || media.type === "animated_gif"
+      ? media.video.duration_millis / 1000
+      : DEFAULT_DURATION_IN_SECONDS_FOR_PHOTO_TWEET
   )
 
   const VIDEO_LENGTH = Math.floor(duration) * VIDEO_FPS;
 
-  const container = oneTimeRender(<PureVideoTweet tweet={tweet} renderSettings={renderSettings} />)
+  const container = oneTimeRender(<PureVideoTweet tweet={tweet} renderSettings={normalizedSettings} />)
   
   await new Promise((resolve) => {
     const intervalId = setInterval(() => {
-      if (media?.type === "video")  {
-        const video = container.querySelector("video")
-        console.log("Waiting for pure video to mount...")
-        if (video) {
-          setTimeout(() => {
-            video.onloadedmetadata = () => {
-              console.warn("onloadedmetadata still available")
-            }
-            video.onloadeddata = () => {
-              console.warn("onloadeddata still available")
-            }
-  
-            console.log("Video mounted,", `${video.clientWidth}x${video.clientHeight}`)
-            clearInterval(intervalId)
-            resolve(true)  
-          }, 500)
-        }
-      } else {
-        console.log("Waiting for pure component to mount...")
-        if (container.clientHeight > 0) {
-          setTimeout(() => {
-            console.log("Component mounted,", `${container.clientWidth}x${container.clientHeight}`)
-            clearInterval(intervalId)
-            resolve(true)  
-          })
-        }
+      console.log("Waiting for pure component to mount...")
+      if (container.clientHeight > 0) {
+        setTimeout(() => {
+          console.log("Component mounted,", `${container.clientWidth}x${container.clientHeight}`)
+          clearInterval(intervalId)
+          resolve(true)  
+        })
       }
     }, 200)
   })
@@ -86,7 +71,7 @@ export const CALCULATE_RENDER_DIMENSIONS = async ({ tweet, renderSettings }: Twe
   container.remove()
 
   return {
-    durationInFrames: VIDEO_LENGTH + OUTRO_DURATION_IN_FRAMES,
+    durationInFrames: VIDEO_LENGTH,
     height,
     width,
   };

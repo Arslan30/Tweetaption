@@ -1,5 +1,4 @@
 import { z } from "zod";
-import type { RenderMediaOnLambdaOutput } from "@remotion/lambda/client";
 import {
   FetchTweetRequest,
   FetchTweetResponse,
@@ -8,6 +7,11 @@ import {
   RenderRequest,
 } from "../types/schema";
 import { ApiResponse } from "../helpers/api-response";
+
+type RenderVideoResponse = {
+  renderId: string;
+  bucketName: string;
+};
 
 const makeRequest = async <Res>(
   endpoint: string,
@@ -33,7 +37,7 @@ export const renderVideo = async ({
   tweetId,
   renderSettings
 }: z.infer<typeof RenderRequest>) => {
-  return makeRequest<RenderMediaOnLambdaOutput>("/api/lambda/render", {
+  return makeRequest<RenderVideoResponse>("/api/lambda/render", {
     id,
     tweetId,
     renderSettings

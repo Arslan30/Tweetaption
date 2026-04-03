@@ -1,6 +1,7 @@
 import React from "react"
 import { TweetDefinitelyExists } from "../../../../../../types/constants"
 import { TweetAuthorName } from "./TweetAuthorName"
+import { getAssetSrc } from "../../../../../../lib/remotion-asset-src"
 
 const TweetHeaderUnMemoized = (props: TweetDefinitelyExists) => {
   const GAP_BETWEEN_AVATAR_AND_TEXT = '0.6em'
@@ -10,7 +11,7 @@ const TweetHeaderUnMemoized = (props: TweetDefinitelyExists) => {
   return (
     <div className="flex text-tweet-sm items-center mb-[0.6em] font-tweet" style={{ gap: GAP_BETWEEN_AVATAR_AND_TEXT }}>
       <img
-        src={props.tweet.user.profile_image_url_https}
+        src={getAssetSrc(props.tweet.user.profile_image_url_https)}
         alt="User Avatar"
         className="border"
         style={{ width: AVATAR_SIZE, height: AVATAR_SIZE, borderRadius: '9999px' }}

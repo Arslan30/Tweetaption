@@ -7,7 +7,8 @@ export type TweetSchemaType = z.infer<typeof TweetSchema>;
 export const RenderSettingsSchema = z.object({
   includeParent: z.boolean(),
   includeQuoted: z.boolean(),
-  mediaIndex: z.number()
+  mediaIndex: z.number(),
+  includeAudio: z.boolean(),
 })
 
 export type RenderSettingsSchemaType = z.infer<typeof RenderSettingsSchema>;
@@ -75,7 +76,8 @@ export const defaultMainProps: TweetDefinitelyExists = {
   renderSettings: {
     includeParent: false,
     includeQuoted: false,
-    mediaIndex: 0
+    mediaIndex: 0,
+    includeAudio: true,
   }
 };
 
